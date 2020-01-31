@@ -1,22 +1,9 @@
 import React from "react";
-import * as spreadsheetData from "../../data";
-import styles from "./Project.module.css";
 import { Card, CardColumns } from "react-bootstrap";
 
 class Project extends React.Component {
   state = {
-    projects: [],
     flipped: {}
-  };
-
-  componentDidMount = () => {
-    spreadsheetData.getSpreadsheet().then(this.spreadsheeetSuccess);
-  };
-
-  spreadsheeetSuccess = data => {
-    this.setState({
-      projects: data
-    });
   };
 
   flipCard = id => {
@@ -32,7 +19,7 @@ class Project extends React.Component {
     return (
       <div style={{ margin: "20px" }}>
         <CardColumns>
-          {this.state.projects.map((data, index) => (
+          {this.props.projects.map((data, index) => (
             <Card
               key={data.id}
               className="p-3"
@@ -40,7 +27,7 @@ class Project extends React.Component {
             >
               {!this.state.flipped[data.id] ? (
                 <div>
-                   <p>{data.sector}</p>
+                  <p>{data.sector}</p>
                   <Card.Body
                     style={{
                       textAlign: "center",

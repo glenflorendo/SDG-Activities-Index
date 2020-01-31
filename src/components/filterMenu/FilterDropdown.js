@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import * as spreadsheetData from "../../data";
 import {
   Dropdown,
   DropdownButton,
@@ -10,40 +9,6 @@ import {
 } from "react-bootstrap";
 
 class FilterDropdown extends Component {
-  state = {
-    projects: [],
-    projectsDisplay: [],
-    themes: [],
-    sectors: []
-  };
-
-  componentDidMount = () => {
-    spreadsheetData.getSpreadsheet().then(this.spreadsheeetSuccess);
-  };
-
-  spreadsheeetSuccess = data => {
-    const themesArray = data.map(data => data.theme);
-    const themesArrayNoDuplicates = Array.from(new Set(themesArray));
-    const sectorsArray = data.map(data => data.sector);
-    const sectorsArrayNoDuplicates = Array.from(new Set(sectorsArray));
-    this.setState({
-      projects: data,
-      projectsDisplay: data,
-      themes: themesArrayNoDuplicates,
-      sectors: sectorsArrayNoDuplicates
-    });
-  };
-
-  themeSelected = event => {
-    const theme = event.target.innerText;
-    const themeArr = this.state.projects.filter(
-      project => project.theme === theme
-    );
-    this.setState({
-      projectsDisplay: themeArr
-    });
-  };
-
   render() {
     return (
       <div style={{ marginTop: "20px" }}>
@@ -59,8 +24,11 @@ class FilterDropdown extends Component {
                   id="dropdown-basic-button"
                   title="Theme"
                 >
-                  {this.state.themes.map(theme => (
-                    <Dropdown.Item key={theme} onClick={this.themeSelected}>
+                  {this.props.themes.map(theme => (
+                    <Dropdown.Item
+                      key={theme}
+                      onClick={() => this.props.selectTheme(theme)}
+                    >
                       {theme}
                     </Dropdown.Item>
                   ))}
@@ -72,8 +40,11 @@ class FilterDropdown extends Component {
                   id="dropdown-basic-button"
                   title="Sector"
                 >
-                  {this.state.sectors.map(sector => (
-                    <Dropdown.Item key={sector} href="#/action-1">
+                  {this.props.sectors.map(sector => (
+                    <Dropdown.Item
+                      key={sector}
+                      onClick={() => this.props.selectSector(sector)}
+                    >
                       {sector}
                     </Dropdown.Item>
                   ))}
@@ -85,11 +56,11 @@ class FilterDropdown extends Component {
                   id="dropdown-basic-button"
                   title="Activity Type"
                 >
-                  {this.state.projects.map(data => (
+                  {/* {this.state.projects.map(data => (
                     <Dropdown.Item key={data.id} href="#/action-3">
                       {data.theme}
                     </Dropdown.Item>
-                  ))}
+                  ))} */}
                 </DropdownButton>
               </Col>
             </ButtonToolbar>
