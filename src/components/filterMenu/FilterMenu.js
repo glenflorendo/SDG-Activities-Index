@@ -5,20 +5,42 @@ import {
   ButtonToolbar,
   Container,
   Row,
-  Col
+  Col,
+  Form,
+  Button
 } from "react-bootstrap";
 
-class FilterDropdown extends Component {
+class FilterMenu extends Component {
+  constructor(props) {
+    super(props);
+    this.keyword = React.createRef();
+  }
+
+  submit() {
+    var keyword = this.keyword.current.value;
+    this.props.searchProjects(keyword);
+  }
+
   render() {
     return (
       <div style={{ marginTop: "20px" }}>
         <Container>
           <Row className="justify-content-md-center">
+            <h5>Filter by</h5>
             <ButtonToolbar aria-label="Toolbar with button groups">
-              <Col>
-                <h5>Filter by</h5>
+              <Col sm={6}>
+                <Form>
+                  <Form.Group controlId="search">
+                    <Form.Control
+                      type="text"
+                      placeholder="Search by Keyword"
+                      ref={this.keyword}
+                      onChange={() => this.submit()}
+                    />
+                  </Form.Group>
+                </Form>
               </Col>
-              <Col>
+              <Col sm={2}>
                 <DropdownButton
                   variant="secondary"
                   id="dropdown-basic-button"
@@ -34,7 +56,7 @@ class FilterDropdown extends Component {
                   ))}
                 </DropdownButton>
               </Col>
-              <Col>
+              <Col sm={2}>
                 <DropdownButton
                   variant="secondary"
                   id="dropdown-basic-button"
@@ -50,7 +72,7 @@ class FilterDropdown extends Component {
                   ))}
                 </DropdownButton>
               </Col>
-              <Col>
+              <Col sm={2}>
                 <DropdownButton
                   variant="secondary"
                   id="dropdown-basic-button"
@@ -63,6 +85,11 @@ class FilterDropdown extends Component {
                   ))} */}
                 </DropdownButton>
               </Col>
+              <Col>
+                <Button variant="link" onClick={() => this.props.resetFilter()}>
+                  Reset Filter
+                </Button>
+              </Col>
             </ButtonToolbar>
           </Row>
         </Container>
@@ -70,4 +97,4 @@ class FilterDropdown extends Component {
     );
   }
 }
-export default FilterDropdown;
+export default FilterMenu;

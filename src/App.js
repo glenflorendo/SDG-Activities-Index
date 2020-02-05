@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import * as spreadsheetData from "./data";
 import Project from "./components/projects/Project";
-import FilterDropdown from "./components/filterMenu/FilterDropdown";
+import FilterMenu from "./components/filterMenu/FilterMenu";
 import Button from "react-bootstrap/Button";
 
 class App extends React.Component {
@@ -39,6 +39,7 @@ class App extends React.Component {
       projectsDisplay: themeArr
     });
   };
+
   sectorSelected = data => {
     const sectorArr = this.state.projects.filter(
       project => project.sector === data
@@ -48,17 +49,36 @@ class App extends React.Component {
     });
   };
 
+  resetFilter = () => {
+    this.setState({
+      projectsDisplay: this.state.projects
+    });
+  };
+
+  handleSearch = value => {
+    const searchArr = this.state.projects.filter(entry =>
+      Object.values(entry).some(
+        val => typeof val === "string" && val.toLowerCase().includes(value)
+      )
+    );
+    this.setState({
+      projectsDisplay: searchArr
+    });
+  };
+
   render() {
     return (
       <div className="App">
         <div style={{ textAlign: "center" }}>
           <h1>LOS ANGELES SDGs ACTIVITIES INDEX</h1>
           <Button variant="warning">+ ADD YOUR PROJECT</Button>
-          <FilterDropdown
+          <FilterMenu
             themes={this.state.themes}
             sectors={this.state.sectors}
             selectTheme={this.themeSelected}
             selectSector={this.sectorSelected}
+            searchProjects={this.handleSearch}
+            resetFilter={this.resetFilter}
           />
         </div>
         <br />
