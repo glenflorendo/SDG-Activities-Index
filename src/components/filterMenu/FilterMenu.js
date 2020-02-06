@@ -85,12 +85,24 @@ class FilterMenu extends Component {
                   ))} */}
                 </DropdownButton>
               </Col>
-              <Col>
-                <Button variant="link" onClick={() => this.props.resetFilter()}>
-                  Reset Filter
-                </Button>
-              </Col>
             </ButtonToolbar>
+          </Row>
+          <Row>
+            <Col>
+              <Form.Group controlId="formBasicCheckbox">
+                <Form.Check type="checkbox" label="Projects" />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group controlId="formBasicCheckbox">
+                <Form.Check type="checkbox" label="Organizations" />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Button variant="link" onClick={() => this.props.resetFilter()}>
+                Reset Filter
+              </Button>
+            </Col>
           </Row>
         </Container>
       </div>

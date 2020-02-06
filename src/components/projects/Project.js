@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, CardColumns } from "react-bootstrap";
+import style from "./Project.module.css";
 
 class Project extends React.Component {
   state = {
@@ -22,11 +23,11 @@ class Project extends React.Component {
           {this.props.projects.map((data, index) => (
             <Card
               key={data.id}
-              className="p-3"
               onClick={() => this.flipCard(data.id)}
+              className={`${style.card} p-3`}
             >
               {!this.state.flipped[data.id] ? (
-                <div>
+                <div className={style.front}>
                   <p>{data.sector}</p>
                   <Card.Body
                     style={{
@@ -41,7 +42,10 @@ class Project extends React.Component {
                   <p style={{ textAlign: "right" }}>{data.theme}</p>
                 </div>
               ) : (
-                <div style={{ textAlign: "center", backgroundColor: "0083BF" }}>
+                <div
+                  style={{ textAlign: "center", backgroundColor: "0083BF" }}
+                  className={style.back}
+                >
                   <Card.Title>{data.projectname}</Card.Title>
                   <Card.Text>{data.organization}</Card.Text>
                   <small>{data.description}</small>

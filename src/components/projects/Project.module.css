@@ -1,0 +1,10 @@
+.card {
+  perspective: 500px;
+  transition: transform 1s;
+ 
+}
+
+.card:active {
+  transform: rotateY( 180deg ) ;
+  transition: transform 0.5s;
+}
