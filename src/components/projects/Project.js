@@ -4,7 +4,8 @@ import style from "./Project.module.css";
 
 class Project extends React.Component {
   state = {
-    flipped: {}
+    flipped: {},
+    backgroundColor: ""
   };
 
   flipCard = id => {
@@ -14,6 +15,14 @@ class Project extends React.Component {
         [id]: !prevState.flipped[id]
       }
     }));
+  };
+
+  backgroundColor = () => {
+    if (this.props.projects.actvityType === "organization") {
+      this.setState({ backgroundColor: "primary" });
+    } else if (this.props.projects.actvityType === "project") {
+      this.setState({ backgroundColor: "warning" });
+    }
   };
 
   getSdgImages = projectSDGs => {
@@ -60,7 +69,9 @@ class Project extends React.Component {
                 </Card>
               ) : (
                 <Card
-                  bg="primary"
+                  bg={
+                    data.activitytype === "organization" ? "warning" : "primary"
+                  }
                   style={{
                     color: "white",
                     textAlign: "center"
