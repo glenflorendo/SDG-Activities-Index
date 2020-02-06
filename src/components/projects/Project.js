@@ -28,7 +28,7 @@ class Project extends React.Component {
       })
     );
     const sdgImages = finalArray.map((data, index) => (
-      <img key={index} src={data} width="30" height="30" alt="goal" />
+      <img key={index} src={data} width="auto" height="30" alt="goal" />
     ));
     return sdgImages;
   };
@@ -38,13 +38,13 @@ class Project extends React.Component {
       <div style={{ margin: "20px" }}>
         <CardColumns>
           {this.props.projects.map((data, index) => (
-            <Card
+            <div
               key={data.id}
               onClick={() => this.flipCard(data.id)}
-              className={`${style.card} p-3`}
+              className={style.card}
             >
               {!this.state.flipped[data.id] ? (
-                <div className={style.front}>
+                <Card className={`${style.front} p-3`}>
                   <p>{data.sector}</p>
                   <Card.Body
                     style={{
@@ -57,18 +57,25 @@ class Project extends React.Component {
                   </Card.Body>
                   <Card.Text>{this.getSdgImages(data.sdg)}</Card.Text>
                   <p style={{ textAlign: "right" }}>{data.theme}</p>
-                </div>
+                </Card>
               ) : (
-                <div style={{ textAlign: "center" }} className={style.back}>
+                <Card
+                  bg="primary"
+                  style={{
+                    color: "white",
+                    textAlign: "center"
+                  }}
+                  className={`${style.back} p-3`}
+                >
                   <i className="fas fa-undo" style={{ float: "right" }}></i>
                   <Card.Title>{data.projectname}</Card.Title>
                   <Card.Text>{data.organization}</Card.Text>
                   <small>{data.description}</small>
                   <br />
                   <Card.Link href={`${data.website}`}>Read More</Card.Link>
-                </div>
+                </Card>
               )}
-            </Card>
+            </div>
           ))}
         </CardColumns>
       </div>
