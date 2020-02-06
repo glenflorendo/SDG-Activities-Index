@@ -46,10 +46,10 @@ class FilterMenu extends Component {
   render() {
     return (
       <div style={{ marginTop: "20px" }}>
-        <Container>
-          <Row className="justify-content-md-center">
-            <h5>Filter by</h5>
-            <ButtonToolbar aria-label="Toolbar with button groups">
+        <h5>Filter by</h5>
+        <ButtonToolbar aria-label="Toolbar with button groups">
+          <Container>
+            <Row className="justify-content-md-center">
               <Col sm={6}>
                 <Form>
                   <Form.Group controlId="search">
@@ -112,36 +112,36 @@ class FilterMenu extends Component {
                   ))}
                 </DropdownButton>
               </Col>
-            </ButtonToolbar>
-          </Row>
-          <Row>
-            <Col>
-              <Form.Group controlId="projectsCheckbox">
-                <Form.Check
-                  type="checkbox"
-                  label="Projects"
-                  checked={this.state.isChecked}
-                  onClick={this.handleProjects}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group controlId="orgsCheckbox">
-                <Form.Check
-                  type="checkbox"
-                  label="Organizations"
-                  checked={this.state.orgsChecked}
-                  onClick={this.handleOrgs}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Button variant="link" onClick={() => this.props.resetFilter()}>
-                Reset Filter
-              </Button>
-            </Col>
-          </Row>
-        </Container>
+            </Row>
+            <Row>
+              <Col sm={4}>
+                <Form.Group controlId="projectsCheckbox">
+                  <Form.Check
+                    type="checkbox"
+                    label="Projects"
+                    checked={this.state.isChecked}
+                    onChange={this.handleProjects}
+                  />
+                </Form.Group>
+              </Col>
+              <Col sm={4}>
+                <Form.Group controlId="orgsCheckbox">
+                  <Form.Check
+                    type="checkbox"
+                    label="Organizations"
+                    checked={this.state.orgsChecked}
+                    onChange={this.handleOrgs}
+                  />
+                </Form.Group>
+              </Col>
+              <Col sm={4}>
+                <Button variant="link" onClick={() => this.props.resetFilter()}>
+                  Reset Filter
+                </Button>
+              </Col>
+            </Row>
+          </Container>
+        </ButtonToolbar>
       </div>
     );
   }

@@ -16,6 +16,23 @@ class Project extends React.Component {
     }));
   };
 
+  getSdgImages = projectSDGs => {
+    let projectSDGsArr = projectSDGs.split(",");
+    let sdgArray = this.props.goals;
+    const finalArray = [];
+    projectSDGsArr.forEach(projectSDG =>
+      sdgArray.forEach(sdg => {
+        if (projectSDG === sdg.id) {
+          finalArray.push(sdg.image);
+        }
+      })
+    );
+    const sdgImages = finalArray.map((data, index) => (
+      <img key={index} src={data} width="30" height="30" alt="goal" />
+    ));
+    return sdgImages;
+  };
+
   render() {
     return (
       <div style={{ margin: "20px" }}>
@@ -38,14 +55,11 @@ class Project extends React.Component {
                     <Card.Title>{data.projectname}</Card.Title>
                     <Card.Text>{data.organization}</Card.Text>
                   </Card.Body>
-                  <Card.Text>{data.sdg}</Card.Text>
+                  <Card.Text>{this.getSdgImages(data.sdg)}</Card.Text>
                   <p style={{ textAlign: "right" }}>{data.theme}</p>
                 </div>
               ) : (
-                <div
-                  style={{ textAlign: "center", backgroundColor: "0083BF" }}
-                  className={style.back}
-                >
+                <div style={{ textAlign: "center" }} className={style.back}>
                   <i className="fas fa-undo" style={{ float: "right" }}></i>
                   <Card.Title>{data.projectname}</Card.Title>
                   <Card.Text>{data.organization}</Card.Text>

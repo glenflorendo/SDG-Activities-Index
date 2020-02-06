@@ -77,7 +77,7 @@ class App extends React.Component {
 
   goalSelected = data => {
     const goalArr = this.state.projects.filter(project =>
-      project.sdg.includes(data.id)
+      project.sdg.split(",").includes(data.id)
     );
     this.setState({
       projectsDisplay: goalArr
