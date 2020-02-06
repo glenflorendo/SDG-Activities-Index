@@ -15,4 +15,17 @@ async function getSpreadsheet() {
   return rows;
 }
 
-export { getSpreadsheet };
+async function getGoals() {
+  const sdgDoc = new GoogleSpreadsheet(
+    `1UFYSr59H54aSMYiuGEbqOKUL41ddEhuYbQZplmhG8qs`
+  );
+  await promisify(sdgDoc.useServiceAccountAuth)(cred).catch(err =>
+    console.log("Google Sheets Authentication Error")
+  );
+  const sdgInfo = await promisify(sdgDoc.getInfo)();
+  const sdgSheet = sdgInfo.worksheets[2];
+  const sdgRows = await promisify(sdgSheet.getRows)();
+  return sdgRows;
+}
+
+export { getSpreadsheet, getGoals };

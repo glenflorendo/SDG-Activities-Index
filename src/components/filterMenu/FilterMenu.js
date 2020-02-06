@@ -96,15 +96,20 @@ class FilterMenu extends Component {
               </Col>
               <Col sm={2}>
                 <DropdownButton
+                  drop="down"
                   variant="secondary"
                   id="dropdown-basic-button"
-                  title="Activity Type"
+                  title="SDG"
                 >
-                  {/* {this.state.projects.map(data => (
-                    <Dropdown.Item key={data.id} href="#/action-3">
-                      {data.theme}
+                  {this.props.goals.map(goal => (
+                    <Dropdown.Item
+                      key={goal.id}
+                      onClick={() => this.props.selectGoal(goal)}
+                    >
+                      <img src={goal.image} alt="goal" width="30" height="30" />{" "}
+                      {goal.name}
                     </Dropdown.Item>
-                  ))} */}
+                  ))}
                 </DropdownButton>
               </Col>
             </ButtonToolbar>

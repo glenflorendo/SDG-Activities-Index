@@ -11,11 +11,13 @@ class App extends React.Component {
     projectsDisplay: [],
     themes: [],
     theme: "",
-    sectors: []
+    sectors: [],
+    goals: []
   };
 
   componentDidMount = () => {
     spreadsheetData.getSpreadsheet().then(this.spreadsheeetSuccess);
+    spreadsheetData.getGoals().then(this.goalsSuccess);
   };
 
   spreadsheeetSuccess = data => {
@@ -28,6 +30,12 @@ class App extends React.Component {
       projectsDisplay: data,
       themes: themesArrayNoDuplicates,
       sectors: sectorsArrayNoDuplicates
+    });
+  };
+
+  goalsSuccess = data => {
+    this.setState({
+      goals: data
     });
   };
 
@@ -57,12 +65,22 @@ class App extends React.Component {
       projectsDisplay: projectsArr
     });
   };
+
   organizationsSelected = () => {
     const organizationsArr = this.state.projects.filter(
       project => project.activitytype === "organization"
     );
     this.setState({
       projectsDisplay: organizationsArr
+    });
+  };
+
+  goalSelected = data => {
+    const goalArr = this.state.projects.filter(project =>
+      project.sdg.includes(data.id)
+    );
+    this.setState({
+      projectsDisplay: goalArr
     });
   };
 
@@ -98,10 +116,15 @@ class App extends React.Component {
             selectProjects={this.projectsSelected}
             selectOrganizations={this.organizationsSelected}
             resetFilter={this.resetFilter}
+            goals={this.state.goals}
+            selectGoal={this.goalSelected}
           />
         </div>
         <br />
-        <Project projects={this.state.projectsDisplay} />
+        <Project
+          projects={this.state.projectsDisplay}
+          goals={this.state.goals}
+        />
       </div>
     );
   }

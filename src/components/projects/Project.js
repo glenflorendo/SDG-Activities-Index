@@ -46,6 +46,7 @@ class Project extends React.Component {
                   style={{ textAlign: "center", backgroundColor: "0083BF" }}
                   className={style.back}
                 >
+                  <i className="fas fa-undo" style={{ float: "right" }}></i>
                   <Card.Title>{data.projectname}</Card.Title>
                   <Card.Text>{data.organization}</Card.Text>
                   <small>{data.description}</small>
