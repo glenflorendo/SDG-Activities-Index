@@ -49,6 +49,23 @@ class App extends React.Component {
     });
   };
 
+  projectsSelected = () => {
+    const projectsArr = this.state.projects.filter(
+      project => project.activitytype === "project"
+    );
+    this.setState({
+      projectsDisplay: projectsArr
+    });
+  };
+  organizationsSelected = () => {
+    const organizationsArr = this.state.projects.filter(
+      project => project.activitytype === "organization"
+    );
+    this.setState({
+      projectsDisplay: organizationsArr
+    });
+  };
+
   resetFilter = () => {
     this.setState({
       projectsDisplay: this.state.projects
@@ -78,6 +95,8 @@ class App extends React.Component {
             selectTheme={this.themeSelected}
             selectSector={this.sectorSelected}
             searchProjects={this.handleSearch}
+            selectProjects={this.projectsSelected}
+            selectOrganizations={this.organizationsSelected}
             resetFilter={this.resetFilter}
           />
         </div>

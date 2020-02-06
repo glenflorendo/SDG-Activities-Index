@@ -4,6 +4,10 @@
  
 }
 
+.card:hover{
+cursor: pointer;
+}
+
 .card:active {
   transform: rotateY( 180deg ) ;
   transition: transform 0.5s;
