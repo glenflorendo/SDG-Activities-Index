@@ -1,0 +1,45 @@
+.add-project {
+  background-color: #ff9244 !important;
+  border-color: #ff9244 !important;
+}
+
+#dropdown-basic-button {
+  background-color: #114477 !important;
+  border-color: #114477 !important;
+}
+
+.form-control {
+  background-color: #114477 !important;
+  border-color: #114477 !important;
+  color: white !important;
+}
+
+.form-control:focus {
+  box-shadow: 0 0 3px #545454 inset !important;
+  outline: none;
+}
+
+::placeholder {
+  color: white !important;
+}
+
+.card {
+  height: 25rem;
+  width: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .card-column .card {
+    column-count: auto;
+  }
+
+  .card {
+    font-size: 10%;
+    height: 15rem;
+    overflow: scroll;
+  }
+  .card-title {
+    font-size: 10px !important;
+  }
+}

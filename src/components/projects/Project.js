@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, CardColumns } from "react-bootstrap";
 import style from "./Project.module.css";
+import Fade from "react-reveal/Fade";
 
 class Project extends React.Component {
   state = {
@@ -53,20 +54,37 @@ class Project extends React.Component {
               className={style.card}
             >
               {!this.state.flipped[data.id] ? (
-                <Card className={`${style.front} p-3`}>
-                  <p>{data.sector}</p>
-                  <Card.Body
-                    style={{
-                      textAlign: "center",
-                      backgroundColor: "lightgrey"
-                    }}
+                <Fade bottom>
+                  <Card
+                    border={
+                      data.activitytype === "organization"
+                        ? "warning"
+                        : "primary"
+                    }
+                    className={`${style.front} mb-4 p-3`}
                   >
-                    <Card.Title>{data.projectname}</Card.Title>
-                    <Card.Text>{data.organization}</Card.Text>
-                  </Card.Body>
-                  <Card.Text>{this.getSdgImages(data.sdg)}</Card.Text>
-                  <p style={{ textAlign: "right" }}>{data.theme}</p>
-                </Card>
+                    <p>{data.sector}</p>
+                    <Card.Body
+                      style={{
+                        textAlign: "center",
+                        backgroundColor: "lightgrey"
+                      }}
+                    >
+                      <Card.Title
+                        text={
+                          data.activitytype === "organization"
+                            ? "warning"
+                            : "primary"
+                        }
+                      >
+                        {data.projectname}
+                      </Card.Title>
+                      <Card.Text>{data.organization}</Card.Text>
+                    </Card.Body>
+                    <Card.Text>{this.getSdgImages(data.sdg)}</Card.Text>
+                    <p style={{ textAlign: "right" }}>{data.theme}</p>
+                  </Card>
+                </Fade>
               ) : (
                 <Card
                   bg={

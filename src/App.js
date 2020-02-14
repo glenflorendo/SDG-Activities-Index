@@ -4,6 +4,7 @@ import * as spreadsheetData from "./data";
 import Project from "./components/projects/Project";
 import FilterMenu from "./components/filterMenu/FilterMenu";
 import Button from "react-bootstrap/Button";
+import { Container } from "react-bootstrap";
 
 class App extends React.Component {
   state = {
@@ -103,10 +104,11 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <div>
+      <Container>
         <div style={{ textAlign: "center" }}>
           <h1>LOS ANGELES SDGs ACTIVITIES INDEX</h1>
-          <Button variant="warning">+ ADD YOUR PROJECT</Button>
+          <Button className="add-project">+ ADD YOUR PROJECT</Button>
           <FilterMenu
             themes={this.state.themes}
             sectors={this.state.sectors}
@@ -125,6 +127,7 @@ class App extends React.Component {
           projects={this.state.projectsDisplay}
           goals={this.state.goals}
         />
+      </Container>
       </div>
     );
   }
