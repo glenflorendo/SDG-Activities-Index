@@ -104,8 +104,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-      <Container>
+      <div style={{backgroundColor: "#EEF2F7"}}>
         <div style={{ textAlign: "center" }}>
           <h1>LOS ANGELES SDGs ACTIVITIES INDEX</h1>
           <Button className="add-project">+ ADD YOUR PROJECT</Button>
@@ -127,7 +126,6 @@ class App extends React.Component {
           projects={this.state.projectsDisplay}
           goals={this.state.goals}
         />
-      </Container>
       </div>
     );
   }

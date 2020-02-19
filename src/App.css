@@ -1,16 +1,16 @@
 .add-project {
-  background-color: #ff9244 !important;
-  border-color: #ff9244 !important;
+  background-color: #c82c5b !important;
+  border-color: #c82c5b !important;
 }
 
 #dropdown-basic-button {
-  background-color: #114477 !important;
-  border-color: #114477 !important;
+  background-color: #16274e !important;
+  border-color: #16274e !important;
 }
 
 .form-control {
-  background-color: #114477 !important;
-  border-color: #114477 !important;
+  background-color: #16274e !important;
+  border-color: #16274e !important;
   color: white !important;
 }
 
@@ -26,6 +26,9 @@
 .card {
   height: 25rem;
   width: auto;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: 5px 10px 8px #888888;
 }
 
 @media only screen and (max-width: 768px) {

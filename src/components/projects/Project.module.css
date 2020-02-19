@@ -1,7 +1,6 @@
 .card {
   perspective: 500px;
   transition: transform 1s;
- 
 }
 
 .card:hover{
