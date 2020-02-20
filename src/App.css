@@ -1,16 +1,23 @@
+body {
+  font-family: sans-serif;
+}
+
 .add-project {
-  background-color: #c82c5b !important;
-  border-color: #c82c5b !important;
+  background-color: #e5253b !important;
+  border-color: #e5253b !important;
 }
 
 #dropdown-basic-button {
-  background-color: #16274e !important;
-  border-color: #16274e !important;
+  background-color: #343434 !important;
+  border-color: #343434 !important;
+}
+.dropdown-item{
+    white-space: normal !important;
 }
 
 .form-control {
-  background-color: #16274e !important;
-  border-color: #16274e !important;
+  background-color: #343434 !important;
+  border-color: #343434 !important;
   color: white !important;
 }
 
@@ -24,11 +31,21 @@
 }
 
 .card {
-  height: 25rem;
+  height: 23rem;
   width: auto;
   border: none !important;
   border-radius: 0 !important;
   box-shadow: 5px 10px 8px #888888;
+  overflow: auto;
+}
+
+.card-title {
+  font-weight: 200 !important;
+  font-size: 2rem !important;
+}
+
+.btn-link {
+  color: #26bde2 !important;
 }
 
 @media only screen and (max-width: 768px) {
@@ -36,13 +53,7 @@
   .card-column .card {
     column-count: auto;
   }
-
-  .card {
-    font-size: 10%;
-    height: 15rem;
-    overflow: scroll;
-  }
   .card-title {
-    font-size: 10px !important;
+    /* font-size: 10px !important; */
   }
 }

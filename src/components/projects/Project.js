@@ -38,9 +38,20 @@ class Project extends React.Component {
       })
     );
     const sdgImages = finalArray.map((data, index) => (
-      <img key={index} src={data} width="auto" height="30" alt="goal" />
+      <img key={index} src={data} width="auto" height="50" alt="goal" />
     ));
     return sdgImages;
+  };
+
+  displayThemes = themes => {
+    let themesArr = themes.split(",");
+    const themesDisplay = themesArr.map((data, index) => (
+      <span key={index} className={style.theme}>
+        {" "}
+        {data}
+      </span>
+    ));
+    return themesDisplay;
   };
 
   render() {
@@ -60,13 +71,17 @@ class Project extends React.Component {
                       style={{ marginTop: "20px", textAlign: "center" }}
                       className={`${style.front} mb-4 p-3`}
                     >
-                      <p>{data.sector}</p>
+                      <p style={{ color: "#a6a6a6" }}>{data.sector}</p>
                       <Card.Body>
-                        <Card.Title>{data.projectname}</Card.Title>
+                        <Card.Title style={{ fontSize: "20px" }}>
+                          {data.projectname}
+                        </Card.Title>
                         <Card.Text>{data.organization}</Card.Text>
                       </Card.Body>
                       <Card.Text>{this.getSdgImages(data.sdg)}</Card.Text>
-                      <p style={{ textAlign: "right" }}>{data.theme}</p>
+                      <div style={{ display: "inline-block" }}>
+                        {this.displayThemes(data.theme)}
+                      </div>
                     </Card>
                   </Fade>
                 ) : (
@@ -87,7 +102,12 @@ class Project extends React.Component {
                     <Card.Text>{data.organization}</Card.Text>
                     <small>{data.description}</small>
                     <br />
-                    <Card.Link href={`${data.website}`}>Read More</Card.Link>
+                    <Card.Link
+                      className={style.readMore}
+                      href={`${data.website}`}
+                    >
+                      Read More
+                    </Card.Link>
                   </Card>
                 )}
               </div>

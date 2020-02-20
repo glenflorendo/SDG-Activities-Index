@@ -104,9 +104,11 @@ class App extends React.Component {
 
   render() {
     return (
-      <div style={{backgroundColor: "#EEF2F7"}}>
+      <div style={{ backgroundColor: "#EDEEF0" }}>
         <div style={{ textAlign: "center" }}>
-          <h1>LOS ANGELES SDGs ACTIVITIES INDEX</h1>
+          <h1 style={{ fontSize: "64px", lineHeight: ".95" }}>
+            LOS ANGELES SDGs ACTIVITIES INDEX
+          </h1>
           <Button className="add-project">+ ADD YOUR PROJECT</Button>
           <FilterMenu
             themes={this.state.themes}

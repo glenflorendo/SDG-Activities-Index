@@ -3,11 +3,34 @@
   transition: transform 1s;
 }
 
-.card:hover{
-cursor: pointer;
+.card:hover {
+  cursor: pointer;
 }
 
 .card:active {
-  transform: rotateY( 180deg ) ;
+  transform: rotateY(180deg);
   transition: transform 0.5s;
+}
+.sdgImage {
+  height: 40px !important;
+  width: 40px !important;
+}
+
+.readMore {
+  color: white !important;
+  margin-bottom: 20px;
+  margin-top: auto;
+}
+
+.readMore:hover {
+  text-decoration: underline !important;
+}
+
+.theme {
+  background-color: #e4e5e6;
+  border-radius: 10px;
+  color: #455262;
+  font-size: 14px;
+  padding: 5px;
+  margin: 5px;
 }
