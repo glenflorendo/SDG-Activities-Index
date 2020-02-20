@@ -61,12 +61,12 @@ class Project extends React.Component {
           <Row>
             {this.props.projects.map((data, index) => (
               <Col key={data.id} sm="12" lg="4">
-                <div
-                  onClick={() => this.flipCard(data.id)}
-                  className={style.card}
-                >
-                  {!this.state.flipped[data.id] ? (
-                    <Fade bottom>
+                <Fade bottom>
+                  <div
+                    onClick={() => this.flipCard(data.id)}
+                    className={style.card}
+                  >
+                    {!this.state.flipped[data.id] ? (
                       <Card
                         style={{ marginTop: "20px", textAlign: "center" }}
                         className={`${style.front} mb-4 p-3`}
@@ -86,34 +86,37 @@ class Project extends React.Component {
                           {this.displayThemes(data.theme)}
                         </div>
                       </Card>
-                    </Fade>
-                  ) : (
-                    <Card
-                      style={{
-                        color: "white",
-                        marginTop: "20px",
-                        textAlign: "center",
-                        backgroundColor:
-                          data.activitytype === "organization"
-                            ? "#ff9244"
-                            : "#2c88c8"
-                      }}
-                      className={`${style.back}  p-3`}
-                    >
-                      <i className="fas fa-undo" style={{ float: "right" }}></i>
-                      <Card.Title>{data.projectname}</Card.Title>
-                      <Card.Text>{data.organization}</Card.Text>
-                      <small>{data.description}</small>
-                      <br />
-                      <Card.Link
-                        className={style.readMore}
-                        href={`${data.website}`}
+                    ) : (
+                      <Card
+                        style={{
+                          color: "white",
+                          marginTop: "20px",
+                          textAlign: "center",
+                          backgroundColor:
+                            data.activitytype === "organization"
+                              ? "#ff9244"
+                              : "#2c88c8"
+                        }}
+                        className={`${style.back}  p-3`}
                       >
-                        Read More
-                      </Card.Link>
-                    </Card>
-                  )}
-                </div>
+                        <i
+                          className="fas fa-undo"
+                          style={{ marginBottom: "10px" }}
+                        ></i>
+                        <Card.Title>{data.projectname}</Card.Title>
+                        <Card.Text>{data.organization}</Card.Text>
+                        <small>{data.description}</small>
+                        <br />
+                        <Card.Link
+                          className={style.readMore}
+                          href={`${data.website}`}
+                        >
+                          Read More
+                        </Card.Link>
+                      </Card>
+                    )}
+                  </div>
+                </Fade>
               </Col>
             ))}
           </Row>

@@ -4,6 +4,7 @@ import * as spreadsheetData from "./data";
 import Project from "./components/projects/Project";
 import FilterMenu from "./components/filterMenu/FilterMenu";
 import Button from "react-bootstrap/Button";
+import headerImage from "./headerImage.png";
 
 class App extends React.Component {
   state = {
@@ -104,9 +105,16 @@ class App extends React.Component {
   render() {
     return (
       <div style={{ backgroundColor: "white" }}>
-        <h1 style={{ padding: "40px", fontSize: "50px" }}>
-          LOS ANGELES SDGs ACTIVITIES INDEX
-        </h1>
+        <img src={headerImage} width="100%" height="auto" />
+        <div style={{ margin: "40px" }}>
+          <h1 style={{ textAlign: "center", size: "7" }}>
+            LOS ANGELES SDGs ACTIVITIES INDEX
+          </h1>
+
+          <p style={{ color: "rgb(16, 162, 198)", textAlign: "center" }}>
+            ────────
+          </p>
+        </div>
         <div style={{ textAlign: "center" }}>
           <Button className="add-project">+ ADD YOUR PROJECT</Button>
         </div>

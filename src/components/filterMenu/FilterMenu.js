@@ -62,7 +62,7 @@ class FilterMenu extends Component {
             </Col>
             <Col xs="3" md="3" lg={{ span: 2, offset: 1 }}>
               <DropdownButton
-                drop="down"
+              className="dropdown"
                 variant="secondary"
                 id="dropdown-basic-button"
                 title="SDG"

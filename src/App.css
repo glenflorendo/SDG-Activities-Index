@@ -3,7 +3,7 @@ body {
 }
 
 .add-project {
-  padding: 20px  !important;
+  padding: 20px !important;
   background-color: #e5253b !important;
   border-color: #e5253b !important;
 }
@@ -29,7 +29,7 @@ body {
 }
 
 .card {
-  height:370px !important;
+  height: 370px !important;
   width: auto;
   border: none !important;
   border-radius: 0 !important;
@@ -48,6 +48,7 @@ body {
 
 .card-body {
   flex: none !important;
+  padding-top: 0px !important;
 }
 
 @media only screen and (max-width: 768px) {
