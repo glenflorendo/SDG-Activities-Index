@@ -3,6 +3,7 @@ body {
 }
 
 .add-project {
+  padding: 20px  !important;
   background-color: #e5253b !important;
   border-color: #e5253b !important;
 }
@@ -11,9 +12,9 @@ body {
   background-color: #343434 !important;
   border-color: #343434 !important;
 }
-.dropdown-item{
-    white-space: normal !important;
-}
+/* .dropdown-item {
+  white-space: normal !important;
+} */
 
 .form-control {
   background-color: #343434 !important;
@@ -35,7 +36,7 @@ body {
   width: auto;
   border: none !important;
   border-radius: 0 !important;
-  box-shadow: 5px 10px 8px #888888;
+  box-shadow: 4px 10px 10px 4px #afafaf;
   overflow: auto;
 }
 

@@ -47,99 +47,101 @@ class FilterMenu extends Component {
     return (
       <div style={{ marginTop: "20px" }}>
         <Container>
-          <h5>Filter by</h5>
-          <ButtonToolbar className="justify-content-center">
-            <Row>
-              <Col sm={6}>
-                <Form>
-                  <Form.Group controlId="search">
-                    <Form.Control
-                      type="text"
-                      placeholder="Search by Keyword"
-                      ref={this.keyword}
-                      onChange={() => this.submit()}
-                    />
-                  </Form.Group>
-                </Form>
-              </Col>
-              <Col sm={2}>
-                <DropdownButton
-                  drop="down"
-                  variant="secondary"
-                  id="dropdown-basic-button"
-                  title="SDG"
-                >
-                  {this.props.goals.map(goal => (
-                    <Dropdown.Item
-                      key={goal.id}
-                      onClick={() => this.props.selectGoal(goal)}
-                    >
-                      <img src={goal.image} alt="goal" width="30" height="30" />{" "}
-                      {goal.name}
-                    </Dropdown.Item>
-                  ))}
-                </DropdownButton>
-              </Col>
-              <Col sm={2}>
-                <DropdownButton
-                  variant="secondary"
-                  id="dropdown-basic-button"
-                  title="Theme"
-                >
-                  {this.props.themes.map(theme => (
-                    <Dropdown.Item
-                      key={theme}
-                      onClick={() => this.props.selectTheme(theme)}
-                    >
-                      {theme}
-                    </Dropdown.Item>
-                  ))}
-                </DropdownButton>
-              </Col>
-              <Col sm={2}>
-                <DropdownButton
-                  variant="secondary"
-                  id="dropdown-basic-button"
-                  title="Sector"
-                >
-                  {this.props.sectors.map(sector => (
-                    <Dropdown.Item
-                      key={sector}
-                      onClick={() => this.props.selectSector(sector)}
-                    >
-                      {sector}
-                    </Dropdown.Item>
-                  ))}
-                </DropdownButton>
-              </Col>
-
-              <Col sm={4}>
-                <Form.Group controlId="projectsCheckbox">
-                  <Form.Check
-                    type="checkbox"
-                    label="Projects"
-                    checked={this.state.isChecked}
-                    onChange={this.handleProjects}
+          <h5 className="offset-lg-1">Filter By</h5>
+          <Row className="justify-content-center">
+            <Col xs="12" lg={{ span: 4, offset: 1 }}>
+              <Form>
+                <Form.Group controlId="search">
+                  <Form.Control
+                    type="text"
+                    placeholder="Search by Keyword"
+                    ref={this.keyword}
+                    onChange={() => this.submit()}
                   />
                 </Form.Group>
-              </Col>
-              <Col sm={4}>
-                <Form.Group controlId="orgsCheckbox">
-                  <Form.Check
-                    type="checkbox"
-                    label="Organizations"
-                    checked={this.state.orgsChecked}
-                    onChange={this.handleOrgs}
-                  />
-                </Form.Group>
-              </Col>
-              <Col sm={4}>
-                <Button variant="link" onClick={() => this.props.resetFilter()}>
-                  Reset Filter
-                </Button>
-              </Col>
-            </Row>
-          </ButtonToolbar>
+              </Form>
+            </Col>
+            <Col xs="3" md="3" lg={{ span: 2, offset: 1 }}>
+              <DropdownButton
+                drop="down"
+                variant="secondary"
+                id="dropdown-basic-button"
+                title="SDG"
+              >
+                {this.props.goals.map(goal => (
+                  <Dropdown.Item
+                    key={goal.id}
+                    onClick={() => this.props.selectGoal(goal)}
+                  >
+                    <img src={goal.image} alt="goal" width="30" height="30" />{" "}
+                    {goal.name}
+                  </Dropdown.Item>
+                ))}
+              </DropdownButton>
+            </Col>
+            <Col xs="3" md="3" lg="2">
+              <DropdownButton
+                variant="secondary"
+                id="dropdown-basic-button"
+                title="Theme"
+              >
+                {this.props.themes.map(theme => (
+                  <Dropdown.Item
+                    key={theme}
+                    onClick={() => this.props.selectTheme(theme)}
+                  >
+                    {theme}
+                  </Dropdown.Item>
+                ))}
+              </DropdownButton>
+            </Col>
+            <Col xs="3" md="3" lg="2">
+              <DropdownButton
+                variant="secondary"
+                id="dropdown-basic-button"
+                title="Sector"
+              >
+                {this.props.sectors.map(sector => (
+                  <Dropdown.Item
+                    key={sector}
+                    onClick={() => this.props.selectSector(sector)}
+                  >
+                    {sector}
+                  </Dropdown.Item>
+                ))}
+              </DropdownButton>
+            </Col>
+          </Row>
+          <Row
+            className="justify-content-center offset-lg-1"
+            style={{ marginTop: "20px" }}
+          >
+            <Col xs lg="3">
+              <Form.Group controlId="projectsCheckbox">
+                <Form.Check
+                  type="checkbox"
+                  label="Projects"
+                  checked={this.state.isChecked}
+                  onChange={this.handleProjects}
+                />
+              </Form.Group>
+            </Col>
+            <Col xs lg="3">
+              <Form.Group controlId="orgsCheckbox">
+                <Form.Check
+                  type="checkbox"
+                  label="Organizations"
+                  checked={this.state.orgsChecked}
+                  onChange={this.handleOrgs}
+                />
+              </Form.Group>
+            </Col>
+            <Col xs="3" md="3" lg="3">
+              <Button variant="link" onClick={() => this.props.resetFilter()}>
+                Reset Filter
+              </Button>
+            </Col>
+          </Row>
         </Container>
       </div>
     );

@@ -104,25 +104,26 @@ class App extends React.Component {
 
   render() {
     return (
-      <div style={{ backgroundColor: "#EDEEF0" }}>
+      <div style={{ backgroundColor: "white" }}>
+        <h1 style={{ padding: "40px", fontSize: "50px" }}>
+          LOS ANGELES SDGs ACTIVITIES INDEX
+        </h1>
         <div style={{ textAlign: "center" }}>
-          <h1 style={{ fontSize: "64px", lineHeight: ".95" }}>
-            LOS ANGELES SDGs ACTIVITIES INDEX
-          </h1>
           <Button className="add-project">+ ADD YOUR PROJECT</Button>
-          <FilterMenu
-            themes={this.state.themes}
-            sectors={this.state.sectors}
-            selectTheme={this.themeSelected}
-            selectSector={this.sectorSelected}
-            searchProjects={this.handleSearch}
-            selectProjects={this.projectsSelected}
-            selectOrganizations={this.organizationsSelected}
-            resetFilter={this.resetFilter}
-            goals={this.state.goals}
-            selectGoal={this.goalSelected}
-          />
         </div>
+        <FilterMenu
+          themes={this.state.themes}
+          sectors={this.state.sectors}
+          selectTheme={this.themeSelected}
+          selectSector={this.sectorSelected}
+          searchProjects={this.handleSearch}
+          selectProjects={this.projectsSelected}
+          selectOrganizations={this.organizationsSelected}
+          resetFilter={this.resetFilter}
+          goals={this.state.goals}
+          selectGoal={this.goalSelected}
+        />
+
         <br />
         <Project
           projects={this.state.projectsDisplay}
