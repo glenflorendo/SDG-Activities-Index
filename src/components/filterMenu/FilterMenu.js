@@ -20,7 +20,7 @@ class FilterMenu extends Component {
   }
 
   handleProjects = () => {
-    this.setState({ isChecked: !this.state.isChecked });
+    this.setState({ isChecked: !this.state.isChecked, orgsChecked: false });
     if (this.state.isChecked === false) {
       this.props.selectProjects();
     } else if (this.state.isChecked === true) {
@@ -29,7 +29,7 @@ class FilterMenu extends Component {
   };
 
   handleOrgs = () => {
-    this.setState({ orgsChecked: !this.state.orgsChecked });
+    this.setState({ orgsChecked: !this.state.orgsChecked, isChecked: false });
     if (this.state.orgsChecked === false) {
       this.props.selectOrganizations();
     } else if (this.state.orgsChecked === true) {

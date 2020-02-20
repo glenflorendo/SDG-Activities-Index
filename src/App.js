@@ -23,8 +23,17 @@ class App extends React.Component {
   };
 
   spreadsheeetSuccess = data => {
+    let themesSplit = [];
+    let themesList = [];
     const themesArray = data.map(data => data.theme);
-    const themesArrayNoDuplicates = Array.from(new Set(themesArray));
+    for (let i = 0; i < themesArray.length; i++) {
+      themesSplit.push(themesArray[i].split(","));
+    }
+    const themesArr = themesSplit.flat(1);
+    for (let i = 0; i < themesArr.length; i++) {
+      themesList.push(themesArr[i].trim());
+    }
+    const themesArrayNoDuplicates = Array.from(new Set(themesList));
     const sectorsArray = data.map(data => data.sector);
     const sectorsArrayNoDuplicates = Array.from(new Set(sectorsArray));
     this.setState({
@@ -43,7 +52,7 @@ class App extends React.Component {
 
   themeSelected = data => {
     const themeArr = this.state.projects.filter(
-      project => project.theme === data
+      project => project.theme.includes(data)
     );
     this.setState({
       projectsDisplay: themeArr
@@ -106,7 +115,7 @@ class App extends React.Component {
   render() {
     return (
       <div style={{ backgroundColor: "white" }}>
-        <img src={headerImage} width="100%" height="auto" />
+        <img src={headerImage} width="100%" height="auto" alt="header" />
         <div style={{ margin: "40px" }}>
           <h1 style={{ textAlign: "center", size: "7" }}>
             LOS ANGELES SDGs ACTIVITIES INDEX
@@ -142,7 +151,7 @@ class App extends React.Component {
           projects={this.state.projectsDisplay}
           goals={this.state.goals}
         />
-        <img src={footerImage} width="100%" height="auto" />
+        <img src={footerImage} width="100%" height="auto" alt="footer" />
       </div>
     );
   }
