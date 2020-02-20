@@ -12,9 +12,6 @@ body {
   background-color: #343434 !important;
   border-color: #343434 !important;
 }
-/* .dropdown-item {
-  white-space: normal !important;
-} */
 
 .form-control {
   background-color: #343434 !important;
@@ -32,7 +29,7 @@ body {
 }
 
 .card {
-  height: 23rem;
+  height:370px !important;
   width: auto;
   border: none !important;
   border-radius: 0 !important;
@@ -47,6 +44,10 @@ body {
 
 .btn-link {
   color: #26bde2 !important;
+}
+
+.card-body {
+  flex: none !important;
 }
 
 @media only screen and (max-width: 768px) {
