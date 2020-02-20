@@ -5,6 +5,7 @@ import Project from "./components/projects/Project";
 import FilterMenu from "./components/filterMenu/FilterMenu";
 import Button from "react-bootstrap/Button";
 import headerImage from "./headerImage.png";
+import footerImage from "./footerImage.png";
 
 class App extends React.Component {
   state = {
@@ -136,6 +137,7 @@ class App extends React.Component {
           projects={this.state.projectsDisplay}
           goals={this.state.goals}
         />
+        <img src={footerImage} width="100%" height="auto" />
       </div>
     );
   }
