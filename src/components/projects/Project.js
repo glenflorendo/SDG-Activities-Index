@@ -60,9 +60,8 @@ class Project extends React.Component {
         <Container>
           <Row>
             {this.props.projects.map((data, index) => (
-              <Col sm="12" lg="4">
+              <Col key={data.id} sm="12" lg="4">
                 <div
-                  key={data.id}
                   onClick={() => this.flipCard(data.id)}
                   className={style.card}
                 >
@@ -81,7 +80,7 @@ class Project extends React.Component {
                         </Card.Body>
                         <Card.Text>{this.getSdgImages(data.sdg)}</Card.Text>
                         <div
-                          className={style.readMore}
+                          className={style.themes}
                           style={{ display: "inline-block" }}
                         >
                           {this.displayThemes(data.theme)}

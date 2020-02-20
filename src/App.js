@@ -4,7 +4,6 @@ import * as spreadsheetData from "./data";
 import Project from "./components/projects/Project";
 import FilterMenu from "./components/filterMenu/FilterMenu";
 import Button from "react-bootstrap/Button";
-import { Container } from "react-bootstrap";
 
 class App extends React.Component {
   state = {
