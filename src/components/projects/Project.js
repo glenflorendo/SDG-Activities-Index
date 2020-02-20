@@ -110,6 +110,7 @@ class Project extends React.Component {
                         <Card.Link
                           className={style.readMore}
                           href={`${data.website}`}
+                          target="_blank"
                         >
                           Read More
                         </Card.Link>
