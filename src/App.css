@@ -29,12 +29,22 @@ body {
 }
 
 .card {
+  perspective: 500px;
+  transition: transform 1s;
   height: 370px !important;
   width: auto;
   border: none !important;
   border-radius: 0 !important;
   box-shadow: 4px 10px 10px 4px #afafaf;
   overflow: auto;
+}
+.card:active {
+  transform: rotateY(180deg);
+  transition: transform 1s;
+}
+
+.card:hover {
+  cursor: pointer;
 }
 
 .card-title {

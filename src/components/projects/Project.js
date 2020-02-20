@@ -69,7 +69,7 @@ class Project extends React.Component {
                     {!this.state.flipped[data.id] ? (
                       <Card
                         style={{ marginTop: "20px", textAlign: "center" }}
-                        className={`${style.front} mb-4 p-3`}
+                        className="mb-4 p-3"
                       >
                         <p style={{ color: "#a6a6a6" }}>{data.sector}</p>
                         <Card.Body>
@@ -97,7 +97,7 @@ class Project extends React.Component {
                               ? "#ff9244"
                               : "#2c88c8"
                         }}
-                        className={`${style.back}  p-3`}
+                        className="p-3"
                       >
                         <i
                           className="fas fa-undo"

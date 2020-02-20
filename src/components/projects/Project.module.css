@@ -1,16 +1,3 @@
-.card {
-  perspective: 500px;
-  transition: transform 1s;
-}
-
-.card:hover {
-  cursor: pointer;
-}
-
-.card:active {
-  transform: rotateY(180deg);
-  transition: transform 0.5s;
-}
 .sdgImage {
   height: 40px !important;
   width: 40px !important;
