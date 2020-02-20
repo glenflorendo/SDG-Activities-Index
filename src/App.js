@@ -117,7 +117,12 @@ class App extends React.Component {
           </p>
         </div>
         <div style={{ textAlign: "center" }}>
-          <Button className="add-project">+ ADD YOUR PROJECT</Button>
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLScl2FysfvinCRgtqJYXPPA22BZEeJSDXCyxLDFls_qTrJONEQ/viewform?usp=sf_link"
+            target="_blank"
+          >
+            <Button className="add-project">+ ADD YOUR PROJECT</Button>
+          </a>
         </div>
         <FilterMenu
           themes={this.state.themes}
