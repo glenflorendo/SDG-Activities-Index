@@ -46,10 +46,14 @@ class FilterMenu extends Component {
     return (
       <div style={{ marginTop: "20px" }}>
         <Container>
-          <h5 className="offset-lg-1">Filter By</h5>
+          <h5 className="offset-lg-2">Filter By</h5>
           <Row className="justify-content-center">
-            <Col xs="12" lg={{ span: 4, offset: 1 }}>
-              <Form>
+            <Col xs="12" lg="4">
+              <Form
+                onSubmit={e => {
+                  e.preventDefault();
+                }}
+              >
                 <Form.Group controlId="search">
                   <Form.Control
                     type="text"
@@ -60,7 +64,7 @@ class FilterMenu extends Component {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs="3" md="3" lg={{ span: 2, offset: 1 }}>
+            <Col xs="3" md="3" lg="1">
               <DropdownButton
                 className="dropdown"
                 variant="secondary"
@@ -78,7 +82,7 @@ class FilterMenu extends Component {
                 ))}
               </DropdownButton>
             </Col>
-            <Col xs="3" md="3" lg="2">
+            <Col xs="3" md="3" lg="1">
               <DropdownButton
                 variant="secondary"
                 id="dropdown-basic-button"
@@ -94,7 +98,7 @@ class FilterMenu extends Component {
                 ))}
               </DropdownButton>
             </Col>
-            <Col xs="3" md="3" lg="2">
+            <Col xs="3" md="3" lg="1">
               <DropdownButton
                 variant="secondary"
                 id="dropdown-basic-button"

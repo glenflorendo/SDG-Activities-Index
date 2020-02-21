@@ -51,8 +51,8 @@ class App extends React.Component {
   };
 
   themeSelected = data => {
-    const themeArr = this.state.projects.filter(
-      project => project.theme.includes(data)
+    const themeArr = this.state.projects.filter(project =>
+      project.theme.includes(data)
     );
     this.setState({
       projectsDisplay: themeArr
