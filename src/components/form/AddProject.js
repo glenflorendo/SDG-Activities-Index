@@ -5,6 +5,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import themesInfo from "../../themesInfo.png";
 import { addProject } from "../../data";
+import swal from "sweetalert";
 
 const CONTAINER = styled.div`
   .error {
@@ -35,8 +36,10 @@ const validationSchema = Yup.object().shape({
     .min(2, "*Names must have at least 2 characters")
     .max(100, "*Names can't be longer than 100 characters")
     .required("*Name is required"),
-  description: Yup.string()
-    .max(250, "*Description must be less than 250 characters"),
+  description: Yup.string().max(
+    250,
+    "*Description must be less than 250 characters"
+  ),
   organization: Yup.string()
     .min(2, "*Organiation name must have at least 2 characters")
     .max(100, "*Organization name can't be longer than 100 characters")
@@ -78,7 +81,7 @@ const AddProject = props => {
           // Simulate submitting to database, shows us values submitted, resets form
           setTimeout(() => {
             addProject(values);
-            alert("Thank you for submitting your project! We will review and add it to our website soon")
+            swal("Thank you!", "Your Project has been submitted.", "success");
             resetForm();
             setSubmitting(false);
           }, 500);
@@ -186,7 +189,9 @@ const AddProject = props => {
             </Form.Group>
 
             <Form.Group controlId="formThemes" name="theme">
-              <Form.Label>Themes* <small>(Select all that apply)</small></Form.Label>
+              <Form.Label>
+                Themes* <small>(Select all that apply)</small>
+              </Form.Label>
 
               <Form.Control
                 name="themes"
@@ -208,7 +213,9 @@ const AddProject = props => {
             </Form.Group>
 
             <Form.Group controlId="sdg">
-              <Form.Label>SDGs* <small>(Select all that apply)</small></Form.Label>{" "}
+              <Form.Label>
+                SDGs* <small>(Select all that apply)</small>
+              </Form.Label>{" "}
               <OverlayTrigger
                 placement="right"
                 overlay={
@@ -278,8 +285,8 @@ const AddProject = props => {
             {/*Submit button that is disabled after button is clicked/form is in the process of submitting*/}
             <BUTTON variant="primary" type="submit" disabled={isSubmitting}>
               Submit
-            </BUTTON>{}
-            
+            </BUTTON>
+            {}
           </Form>
         )}
       </Formik>

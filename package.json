@@ -26,6 +26,7 @@
     "react-scripts": "3.3.0",
     "react-simple-infinite-scroll": "0.0.1",
     "styled-components": "^5.0.1",
+    "sweetalert": "^2.1.2",
     "yup": "^0.28.1"
   },
   "scripts": {
