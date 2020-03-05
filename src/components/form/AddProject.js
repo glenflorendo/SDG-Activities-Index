@@ -10,6 +10,7 @@ import swal from "sweetalert";
 const CONTAINER = styled.div`
   .error {
     border: 2px solid #ff6565;
+    padding: 0.5em 0.2em;
   }
   .error-message {
     color: #ff6565;

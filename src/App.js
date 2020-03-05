@@ -129,11 +129,9 @@ class App extends React.Component {
     // const addActivity = projectForm.AddProject();
     return (
       <div style={{ backgroundColor: "white" }}>
-        <img src={headerImage} width="100%" height="auto" alt="header" />
+        {/* <img src={headerImage} width="100%" height="auto" alt="header" /> */}
         <div style={{ margin: "40px" }}>
-          <h1 style={{ textAlign: "center", size: "7" }}>
-            LOS ANGELES SDGs ACTIVITIES INDEX
-          </h1>
+          <h1 style={{ textAlign: "center", size: "7" }}>ACTIVITIES INDEX</h1>
 
           <p style={{ color: "rgb(16, 162, 198)", textAlign: "center" }}>
             ────────
@@ -184,7 +182,7 @@ class App extends React.Component {
           projects={this.state.projectsDisplay}
           goals={this.state.goals}
         />
-        <img src={footerImage} width="100%" height="auto" alt="footer" />
+        {/* <img src={footerImage} width="100%" height="auto" alt="footer" /> */}
       </div>
     );
   }
