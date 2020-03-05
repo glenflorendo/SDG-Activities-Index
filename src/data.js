@@ -28,4 +28,22 @@ async function getGoals() {
   return sdgRows;
 }
 
-export { getSpreadsheet, getGoals };
+async function addProject(data) {
+  const doc = new GoogleSpreadsheet(
+    `1UFYSr59H54aSMYiuGEbqOKUL41ddEhuYbQZplmhG8qs`
+  );
+  await promisify(doc.useServiceAccountAuth)(cred).catch(err =>
+    console.log("Google Sheets Authentication Error")
+  );
+
+  const info = await promisify(doc.getInfo)();
+  const sheet = info.worksheets[1];
+
+  sheet.addRow(data, function(err) {
+    if (err) {
+      console.log(err);
+    }
+  });
+}
+
+export { getSpreadsheet, getGoals, addProject };

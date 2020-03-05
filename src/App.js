@@ -1,9 +1,10 @@
-import React from "react";
+import React  from "react";
 import "./App.css";
 import * as spreadsheetData from "./data";
-import Project from "./components/projects/Project";
-import FilterMenu from "./components/filterMenu/FilterMenu";
-import Button from "react-bootstrap/Button";
+import Project from "./components/projects/Project.jsx";
+import FilterMenu from "./components/filterMenu/FilterMenu.jsx";
+import AddProject from "./components/form/AddProject.js";
+import { Button, Modal } from "react-bootstrap";
 import headerImage from "./headerImage.png";
 import footerImage from "./footerImage.png";
 
@@ -14,7 +15,8 @@ class App extends React.Component {
     themes: [],
     theme: "",
     sectors: [],
-    goals: []
+    goals: [],
+    modal: false
   };
 
   componentDidMount = () => {
@@ -112,7 +114,17 @@ class App extends React.Component {
     });
   };
 
+  handleShow = () => {
+    this.setState({ modal: true });
+  };
+
+  handleClose = () => {
+    this.setState({ modal: false });
+  };
+
   render() {
+    // const refModal = useRef();
+    // const addActivity = projectForm.AddProject();
     return (
       <div style={{ backgroundColor: "white" }}>
         <img src={headerImage} width="100%" height="auto" alt="header" />
@@ -125,13 +137,33 @@ class App extends React.Component {
             ────────
           </p>
         </div>
+
         <div style={{ textAlign: "center" }}>
-          <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLScl2FysfvinCRgtqJYXPPA22BZEeJSDXCyxLDFls_qTrJONEQ/viewform?usp=sf_link"
-            target="_blank"
+          <Button
+            className="add-project"
+            type="button"
+            onClick={() => {
+              this.handleShow();
+            }}
           >
-            <Button className="add-project">+ ADD YOUR PROJECT</Button>
-          </a>
+            + ADD YOUR PROJECT
+          </Button>
+          <Modal
+            show={this.state.modal}
+            onHide={this.handleClose}
+            animation={false}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>Add Your Project</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <AddProject
+                themes={this.state.themes}
+                sectors={this.state.sectors}
+                goals={this.state.goals}
+              />
+            </Modal.Body>
+          </Modal>
         </div>
         <FilterMenu
           themes={this.state.themes}
@@ -145,7 +177,6 @@ class App extends React.Component {
           goals={this.state.goals}
           selectGoal={this.goalSelected}
         />
-
         <br />
         <Project
           projects={this.state.projectsDisplay}
