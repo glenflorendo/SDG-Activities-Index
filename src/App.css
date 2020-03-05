@@ -9,7 +9,7 @@ body {
 }
 
 .popover {
-  max-width:600px !important;
+  max-width: 600px !important;
   padding: 20px;
   pointer-events: none;
 }
@@ -17,24 +17,24 @@ body {
 /* #dropdown-basic-button {
   background-color: #343434 !important;
   border-color: #343434 !important;
-}
+} */
 
 .dropdown-menu {
-  transform: translate3d(5px, 35px, 0px)!important;
+  transform: translate3d(5px, 35px, 0px) !important;
 }
 
-.form-control {
+/* .form-control {
   background-color: #343434 !important;
   border-color: #343434 !important;
   color: white !important;
-}
+} */
 
-.form-control:focus {
+/* .form-control:focus {
   box-shadow: 0 0 3px #545454 inset !important;
   outline: none;
-}
+} */
 
-::placeholder {
+/* ::placeholder {
   color: white !important;
 } */
 
@@ -78,5 +78,10 @@ body {
   }
   .card-title {
     /* font-size: 10px !important; */
+  }
+}
+@media screen and (min-width: 800px) {
+  .filterBy {
+    padding-left: 45px;
   }
 }

@@ -46,7 +46,11 @@ class FilterMenu extends Component {
     return (
       <div style={{ marginTop: "20px" }}>
         <Container>
-          <h5 className="offset-lg-2">Filter By</h5>
+          <Row >
+            <Col className="offset-lg-2">
+              <h5 className="filterBy" >Filter By</h5>
+            </Col>
+          </Row>
           <Row className="justify-content-center">
             <Col xs="12" lg="4">
               <Form

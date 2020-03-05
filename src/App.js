@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import "./App.css";
 import * as spreadsheetData from "./data";
 import Project from "./components/projects/Project.jsx";
@@ -36,13 +36,15 @@ class App extends React.Component {
       themesList.push(themesArr[i].trim());
     }
     const themesArrayNoDuplicates = Array.from(new Set(themesList));
+    const themesAlphabetical = themesArrayNoDuplicates.sort();
     const sectorsArray = data.map(data => data.sector);
     const sectorsArrayNoDuplicates = Array.from(new Set(sectorsArray));
+    const sectorsAlphabetical = sectorsArrayNoDuplicates.sort();
     this.setState({
       projects: data,
       projectsDisplay: data,
-      themes: themesArrayNoDuplicates,
-      sectors: sectorsArrayNoDuplicates
+      themes: themesAlphabetical,
+      sectors: sectorsAlphabetical
     });
   };
 
