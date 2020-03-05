@@ -107,13 +107,13 @@ class Project extends React.Component {
                         <Card.Text>{data.organization}</Card.Text>
                         <small>{data.description}</small>
                         <br />
-                        <Card.Link
+                        <a
                           className={style.readMore}
                           href={`${data.website}`}
                           target="_blank"
                         >
                           Read More
-                        </Card.Link>
+                        </a>
                       </Card>
                     )}
                   </div>

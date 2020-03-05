@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Form, Button, Popover, OverlayTrigger } from "react-bootstrap";
-import { Formik, ErrorMessage } from "formik";
+import { Form, Button, Popover, OverlayTrigger, Alert } from "react-bootstrap";
+import { Formik } from "formik";
 import * as Yup from "yup";
 import themesInfo from "../../themesInfo.png";
 import { addProject } from "../../data";
@@ -29,9 +29,6 @@ const BUTTON = styled(Button)`
   }
 `;
 
-// RegEx for phone number validation
-const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
-
 // Schema for yup
 const validationSchema = Yup.object().shape({
   projectname: Yup.string()
@@ -39,8 +36,7 @@ const validationSchema = Yup.object().shape({
     .max(100, "*Names can't be longer than 100 characters")
     .required("*Name is required"),
   description: Yup.string()
-    .max(250, "*Description must be less than 250 characters")
-    .required("*Description is required"),
+    .max(250, "*Description must be less than 250 characters"),
   organization: Yup.string()
     .min(2, "*Organiation name must have at least 2 characters")
     .max(100, "*Organization name can't be longer than 100 characters")
@@ -82,7 +78,7 @@ const AddProject = props => {
           // Simulate submitting to database, shows us values submitted, resets form
           setTimeout(() => {
             addProject(values);
-            alert(JSON.stringify(values, null, 2));
+            alert("Thank you for submitting your project! We will review and add it to our website soon")
             resetForm();
             setSubmitting(false);
           }, 500);
@@ -103,7 +99,7 @@ const AddProject = props => {
               <Form.Control
                 type="text"
                 name="projectname"
-                placeholder="Full Name"
+                placeholder="Project Name"
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.name}
@@ -116,7 +112,7 @@ const AddProject = props => {
               ) : null}
             </Form.Group>
             <Form.Group controlId="formDescription">
-              <Form.Label>Description:</Form.Label>
+              <Form.Label>Description</Form.Label>
               <Form.Control
                 type="text"
                 name="description"
@@ -133,7 +129,7 @@ const AddProject = props => {
               ) : null}
             </Form.Group>
             <Form.Group controlId="formOrganization">
-              <Form.Label>Organization:</Form.Label>
+              <Form.Label>Organization*</Form.Label>
               <Form.Control
                 type="text"
                 name="organization"
@@ -152,7 +148,7 @@ const AddProject = props => {
               ) : null}
             </Form.Group>
             <Form.Group controlId="formWebsite">
-              <Form.Label>Website :</Form.Label>
+              <Form.Label>Website*</Form.Label>
               <Form.Control
                 type="text"
                 name="website"
@@ -190,7 +186,7 @@ const AddProject = props => {
             </Form.Group>
 
             <Form.Group controlId="formThemes" name="theme">
-              <Form.Label>Themes*</Form.Label>
+              <Form.Label>Themes* <small>(Select all that apply)</small></Form.Label>
 
               <Form.Control
                 name="themes"
@@ -212,7 +208,7 @@ const AddProject = props => {
             </Form.Group>
 
             <Form.Group controlId="sdg">
-              <Form.Label>SDGs*</Form.Label>{" "}
+              <Form.Label>SDGs* <small>(Select all that apply)</small></Form.Label>{" "}
               <OverlayTrigger
                 placement="right"
                 overlay={
@@ -250,7 +246,7 @@ const AddProject = props => {
             </Form.Group>
 
             <Form.Group controlId="formActivityType">
-              <Form.Label>Activity Type</Form.Label>
+              <Form.Label>Activity Type*</Form.Label>
               <Form.Check
                 type="radio"
                 name="activityType"
@@ -282,7 +278,8 @@ const AddProject = props => {
             {/*Submit button that is disabled after button is clicked/form is in the process of submitting*/}
             <BUTTON variant="primary" type="submit" disabled={isSubmitting}>
               Submit
-            </BUTTON>
+            </BUTTON>{}
+            
           </Form>
         )}
       </Formik>
