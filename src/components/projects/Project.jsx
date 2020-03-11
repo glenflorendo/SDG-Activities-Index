@@ -73,7 +73,10 @@ class Project extends React.Component {
                       >
                         <p style={{ color: "#a6a6a6" }}>{data.sector}</p>
                         <Card.Body>
-                          <Card.Title style={{ fontSize: "20px" }}>
+                          <Card.Title style={{ fontSize: "20px", color:
+                            data.activitytype === "organization"
+                              ? "#ff9244"
+                              : "#2c88c8" }}>
                             {data.projectname}
                           </Card.Title>
                           <Card.Text>{data.organization}</Card.Text>
