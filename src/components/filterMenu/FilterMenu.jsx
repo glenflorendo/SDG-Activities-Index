@@ -128,6 +128,7 @@ class FilterMenu extends Component {
                 <Form.Check
                   type="checkbox"
                   label="Projects"
+                  style={{color: "#2c88c8"}}
                   checked={this.state.isChecked}
                   onChange={this.handleProjects}
                 />
@@ -138,6 +139,7 @@ class FilterMenu extends Component {
                 <Form.Check
                   type="checkbox"
                   label="Organizations"
+                  style={{color: "#ff9244"}}
                   checked={this.state.orgsChecked}
                   onChange={this.handleOrgs}
                 />

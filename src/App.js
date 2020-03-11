@@ -4,9 +4,15 @@ import * as spreadsheetData from "./data";
 import Project from "./components/projects/Project.jsx";
 import FilterMenu from "./components/filterMenu/FilterMenu.jsx";
 import AddProject from "./components/form/AddProject.js";
-import { Button, Modal } from "react-bootstrap";
-import headerImage from "./headerImage.png";
-import footerImage from "./footerImage.png";
+import {
+  Button,
+  Modal,
+  Spinner,
+  Alert,
+  Container,
+  Row,
+  Col
+} from "react-bootstrap";
 
 class App extends React.Component {
   state = {
@@ -16,7 +22,9 @@ class App extends React.Component {
     theme: "",
     sectors: [],
     goals: [],
-    modal: false
+    modal: false,
+    searchError: false,
+    loading: true
   };
 
   componentDidMount = () => {
@@ -44,7 +52,8 @@ class App extends React.Component {
       projects: data,
       projectsDisplay: data,
       themes: themesAlphabetical,
-      sectors: sectorsAlphabetical
+      sectors: sectorsAlphabetical,
+      loading: false
     });
   };
 
@@ -59,7 +68,8 @@ class App extends React.Component {
       project.theme.includes(data)
     );
     this.setState({
-      projectsDisplay: themeArr
+      projectsDisplay: themeArr,
+      searchError: false
     });
   };
 
@@ -68,7 +78,8 @@ class App extends React.Component {
       project => project.sector === data
     );
     this.setState({
-      projectsDisplay: sectorArr
+      projectsDisplay: sectorArr,
+      searchError: false
     });
   };
 
@@ -77,7 +88,8 @@ class App extends React.Component {
       project => project.activitytype === "project"
     );
     this.setState({
-      projectsDisplay: projectsArr
+      projectsDisplay: projectsArr,
+      searchError: false
     });
   };
 
@@ -86,7 +98,8 @@ class App extends React.Component {
       project => project.activitytype === "organization"
     );
     this.setState({
-      projectsDisplay: organizationsArr
+      projectsDisplay: organizationsArr,
+      searchError: false
     });
   };
 
@@ -95,13 +108,15 @@ class App extends React.Component {
       project.sdg.split(",").includes(data.id)
     );
     this.setState({
-      projectsDisplay: goalArr
+      projectsDisplay: goalArr,
+      searchError: false
     });
   };
 
   resetFilter = () => {
     this.setState({
-      projectsDisplay: this.state.projects
+      projectsDisplay: this.state.projects,
+      searchError: false
     });
   };
 
@@ -112,8 +127,14 @@ class App extends React.Component {
       )
     );
     this.setState({
-      projectsDisplay: searchArr
+      projectsDisplay: searchArr,
+      searchError: false
     });
+    if (searchArr.length === 0) {
+      this.setState({
+        searchError: true
+      });
+    }
   };
 
   handleShow = () => {
@@ -125,11 +146,8 @@ class App extends React.Component {
   };
 
   render() {
-    // const refModal = useRef();
-    // const addActivity = projectForm.AddProject();
     return (
       <div style={{ backgroundColor: "white" }}>
-        {/* <img src={headerImage} width="100%" height="auto" alt="header" /> */}
         <div style={{ margin: "40px" }}>
           <h1 style={{ textAlign: "center", size: "7" }}>ACTIVITIES INDEX</h1>
 
@@ -178,11 +196,36 @@ class App extends React.Component {
           selectGoal={this.goalSelected}
         />
         <br />
-        <Project
-          projects={this.state.projectsDisplay}
-          goals={this.state.goals}
-        />
-        {/* <img src={footerImage} width="100%" height="auto" alt="footer" /> */}
+        {this.state.searchError ? (
+          <Container>
+            <Row className="justify-content-md-center">
+              <Col>
+                {" "}
+                <Alert variant="danger">
+                  No cards match your search. Please try filtering for the
+                  content you are looking for.
+                </Alert>
+              </Col>
+            </Row>
+          </Container>
+        ) : (
+          <span></span>
+        )}
+        {this.state.loading ? (
+          <Spinner
+            animation="border"
+            variant="info"
+            style={{ position: "fixed", left: "50%" }}
+            role="status"
+          >
+            <span className="sr-only">Loading...</span>
+          </Spinner>
+        ) : (
+          <Project
+            projects={this.state.projectsDisplay}
+            goals={this.state.goals}
+          />
+        )}
       </div>
     );
   }

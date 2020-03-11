@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Form, Button, Popover, OverlayTrigger, Alert } from "react-bootstrap";
+import { Form, Button, Popover, OverlayTrigger } from "react-bootstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import themesInfo from "../../themesInfo.png";
@@ -43,8 +43,7 @@ const validationSchema = Yup.object().shape({
   ),
   organization: Yup.string()
     .min(2, "*Organiation name must have at least 2 characters")
-    .max(100, "*Organization name can't be longer than 100 characters")
-    .required("*Organization name is required"),
+    .max(100, "*Organization name can't be longer than 100 characters"),
   website: Yup.string()
     .url("*Must enter URL in http://www.example.com format")
     .required("*URL required")
@@ -133,7 +132,7 @@ const AddProject = props => {
               ) : null}
             </Form.Group>
             <Form.Group controlId="formOrganization">
-              <Form.Label>Organization*</Form.Label>
+              <Form.Label>Organization</Form.Label>
               <Form.Control
                 type="text"
                 name="organization"
