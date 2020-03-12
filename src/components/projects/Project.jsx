@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Container, CardColumns } from "react-bootstrap";
+import { Card, Container, CardColumns, Pagination, Row } from "react-bootstrap";
 import style from "./Project.module.css";
 import Fade from "react-reveal/Fade";
 
@@ -7,7 +7,9 @@ class Project extends React.Component {
   state = {
     flipped: {},
     backgroundColor: "",
-    height: {}
+    height: {},
+    currentPage: 1,
+    projectsPerPage: 11
   };
 
   flipCard = id => {
@@ -53,12 +55,48 @@ class Project extends React.Component {
     return themesDisplay;
   };
 
+  getPages = () => {
+    const pageNumbers = [];
+    for (
+      let i = 1;
+      i <= Math.ceil(this.props.projects.length / this.state.projectsPerPage);
+      i++
+    ) {
+      pageNumbers.push(i);
+    }
+    const items = pageNumbers.map(number => (
+      <Pagination.Item
+        key={number}
+        id={number}
+        onClick={e => this.handleClick(e)}
+        active={number === this.state.currentPage}
+      >
+        {number}
+      </Pagination.Item>
+    ));
+    return items;
+  };
+
+  handleClick = event => {
+    this.setState({
+      currentPage: Number(event.target.id)
+    });
+  };
+
   render() {
+    const indexOfLastProject =
+      this.state.currentPage * this.state.projectsPerPage;
+    const indexOfFirstProject = indexOfLastProject - this.state.projectsPerPage;
+    const currentProjects = this.props.projects.slice(
+      indexOfFirstProject,
+      indexOfLastProject
+    );
+
     return (
       <div className={style.projects}>
         <Container>
           <CardColumns>
-            {this.props.projects.map((data, index) => (
+            {currentProjects.map((data, index) => (
               <Fade key={data.id} bottom>
                 <div
                   onClick={() => this.flipCard(data.id)}
@@ -133,6 +171,9 @@ class Project extends React.Component {
               </Fade>
             ))}
           </CardColumns>
+          <Row className="justify-content-center">
+            <Pagination size="lg">{this.getPages()}</Pagination>
+          </Row>
         </Container>
       </div>
     );
