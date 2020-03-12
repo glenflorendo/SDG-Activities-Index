@@ -171,7 +171,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div style={{ backgroundColor: "white" }}>
+      <div style={{ backgroundColor: "white" }} className="App">
         <div style={{ margin: "40px" }}>
           <h1 style={{ textAlign: "center", size: "7" }}>ACTIVITIES INDEX</h1>
 

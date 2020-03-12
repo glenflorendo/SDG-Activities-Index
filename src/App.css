@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  
 }
 
 .add-project {
@@ -13,7 +14,10 @@ body {
   padding: 20px;
   pointer-events: none;
 }
-
+.App{
+  background-image: url("./photo-1542737579-ba0a385f3b84.jpeg");
+  background-size: 100% auto;
+}
 /* #dropdown-basic-button {
   background-color: #343434 !important;
   border-color: #343434 !important;

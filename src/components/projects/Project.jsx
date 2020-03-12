@@ -101,6 +101,9 @@ class Project extends React.Component {
     return (
       <div className={style.projects}>
         <Container>
+        <Row className="justify-content-center">
+            <Pagination size="lg">{this.getPages()}</Pagination>
+          </Row>
           <CardColumns>
             {currentProjects.map((data, index) => (
               <Fade key={data.id} bottom>
@@ -177,9 +180,7 @@ class Project extends React.Component {
               </Fade>
             ))}
           </CardColumns>
-          <Row className="justify-content-center">
-            <Pagination size="lg">{this.getPages()}</Pagination>
-          </Row>
+         
         </Container>
       </div>
     );
