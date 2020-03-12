@@ -45,7 +45,10 @@ const validationSchema = Yup.object().shape({
     .min(2, "*Organiation name must have at least 2 characters")
     .max(100, "*Organization name can't be longer than 100 characters"),
   website: Yup.string()
-    .url("*Must enter URL in http://www.example.com format")
+    .matches(
+      "/^([da-z.-]+).([a-z.]{2,6})([/w .-]*)*/?$/",
+      "*Must enter URL in http://www.example.com format"
+    )
     .required("*URL required")
   // themes: Yup.required(
   //   "Please indicate your communications preference"

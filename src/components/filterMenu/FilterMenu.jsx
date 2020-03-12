@@ -46,9 +46,9 @@ class FilterMenu extends Component {
     return (
       <div style={{ marginTop: "20px" }}>
         <Container>
-          <Row >
+          <Row>
             <Col className="offset-lg-2">
-              <h5 className="filterBy" >Filter By</h5>
+              <h5 className="filterBy">Filter By</h5>
             </Col>
           </Row>
           <Row className="justify-content-center">
@@ -75,10 +75,11 @@ class FilterMenu extends Component {
                 id="dropdown-basic-button"
                 title="SDG"
               >
-                {this.props.goals.map(goal => (
+                {this.props.goals.map((goal, index) => (
                   <Dropdown.Item
                     key={goal.id}
-                    onClick={() => this.props.selectGoal(goal)}
+                    onClick={() => this.props.selectGoal(goal, index)}
+                    active={this.props.active[index]}
                   >
                     <img src={goal.image} alt="goal" width="30" height="30" />{" "}
                     {goal.name}
@@ -96,6 +97,7 @@ class FilterMenu extends Component {
                   <Dropdown.Item
                     key={theme}
                     onClick={() => this.props.selectTheme(theme)}
+                    active={this.props.active[theme]}
                   >
                     {theme}
                   </Dropdown.Item>
@@ -112,6 +114,7 @@ class FilterMenu extends Component {
                   <Dropdown.Item
                     key={sector}
                     onClick={() => this.props.selectSector(sector)}
+                    active={this.props.active[sector]}
                   >
                     {sector}
                   </Dropdown.Item>
@@ -128,7 +131,7 @@ class FilterMenu extends Component {
                 <Form.Check
                   type="checkbox"
                   label="Projects"
-                  style={{color: "#2c88c8"}}
+                  style={{ color: "#2c88c8" }}
                   checked={this.state.isChecked}
                   onChange={this.handleProjects}
                 />
@@ -139,7 +142,7 @@ class FilterMenu extends Component {
                 <Form.Check
                   type="checkbox"
                   label="Organizations"
-                  style={{color: "#ff9244"}}
+                  style={{ color: "#ff9244" }}
                   checked={this.state.orgsChecked}
                   onChange={this.handleOrgs}
                 />

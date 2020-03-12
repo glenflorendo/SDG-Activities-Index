@@ -27,7 +27,9 @@ class App extends React.Component {
       goals: [],
       modal: false,
       searchError: false,
-      loading: true
+      loading: true,
+      filters: [],
+      active: {}
     };
   }
 
@@ -71,10 +73,14 @@ class App extends React.Component {
     const themeArr = this.state.projects.filter(project =>
       project.theme.includes(data)
     );
-    this.setState({
+    this.setState(prevState => ({
       projectsDisplay: themeArr,
-      searchError: false
-    });
+      searchError: false,
+      active: {
+        [data]: !prevState.active[data]
+      }
+    }));
+
     this.resetPage.current.resetCurrentPage();
   };
 
@@ -82,10 +88,13 @@ class App extends React.Component {
     const sectorArr = this.state.projects.filter(
       project => project.sector === data
     );
-    this.setState({
+    this.setState(prevState => ({
       projectsDisplay: sectorArr,
-      searchError: false
-    });
+      searchError: false,
+      active: {
+        [data]: !prevState.active[data]
+      }
+    }));
     this.resetPage.current.resetCurrentPage();
   };
 
@@ -111,14 +120,18 @@ class App extends React.Component {
     this.resetPage.current.resetCurrentPage();
   };
 
-  goalSelected = data => {
+  goalSelected = (data, index) => {
+    console.log(data);
     const goalArr = this.state.projects.filter(project =>
       project.sdg.split(",").includes(data.id)
     );
-    this.setState({
+    this.setState(prevState => ({
       projectsDisplay: goalArr,
-      searchError: false
-    });
+      searchError: false,
+      active: {
+        [index]: !prevState.active[index]
+      }
+    }));
     this.resetPage.current.resetCurrentPage();
   };
 
@@ -205,6 +218,7 @@ class App extends React.Component {
           resetFilter={this.resetFilter}
           goals={this.state.goals}
           selectGoal={this.goalSelected}
+          active={this.state.active}
         />
         <br />
         {this.state.searchError ? (
