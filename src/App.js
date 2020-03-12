@@ -15,17 +15,21 @@ import {
 } from "react-bootstrap";
 
 class App extends React.Component {
-  state = {
-    projects: [],
-    projectsDisplay: [],
-    themes: [],
-    theme: "",
-    sectors: [],
-    goals: [],
-    modal: false,
-    searchError: false,
-    loading: true
-  };
+  constructor(props) {
+    super(props);
+    this.resetPage = React.createRef();
+    this.state = {
+      projects: [],
+      projectsDisplay: [],
+      themes: [],
+      theme: "",
+      sectors: [],
+      goals: [],
+      modal: false,
+      searchError: false,
+      loading: true
+    };
+  }
 
   componentDidMount = () => {
     spreadsheetData.getSpreadsheet().then(this.spreadsheeetSuccess);
@@ -71,6 +75,7 @@ class App extends React.Component {
       projectsDisplay: themeArr,
       searchError: false
     });
+    this.resetPage.current.resetCurrentPage();
   };
 
   sectorSelected = data => {
@@ -81,6 +86,7 @@ class App extends React.Component {
       projectsDisplay: sectorArr,
       searchError: false
     });
+    this.resetPage.current.resetCurrentPage();
   };
 
   projectsSelected = () => {
@@ -91,6 +97,7 @@ class App extends React.Component {
       projectsDisplay: projectsArr,
       searchError: false
     });
+    this.resetPage.current.resetCurrentPage();
   };
 
   organizationsSelected = () => {
@@ -101,6 +108,7 @@ class App extends React.Component {
       projectsDisplay: organizationsArr,
       searchError: false
     });
+    this.resetPage.current.resetCurrentPage();
   };
 
   goalSelected = data => {
@@ -111,6 +119,7 @@ class App extends React.Component {
       projectsDisplay: goalArr,
       searchError: false
     });
+    this.resetPage.current.resetCurrentPage();
   };
 
   resetFilter = () => {
@@ -118,6 +127,7 @@ class App extends React.Component {
       projectsDisplay: this.state.projects,
       searchError: false
     });
+    this.resetPage.current.resetCurrentPage();
   };
 
   handleSearch = value => {
@@ -135,6 +145,7 @@ class App extends React.Component {
         searchError: true
       });
     }
+    this.resetPage.current.resetCurrentPage();
   };
 
   handleShow = () => {
@@ -224,6 +235,7 @@ class App extends React.Component {
           <Project
             projects={this.state.projectsDisplay}
             goals={this.state.goals}
+            ref={this.resetPage}
           />
         )}
       </div>

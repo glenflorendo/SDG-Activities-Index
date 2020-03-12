@@ -83,6 +83,12 @@ class Project extends React.Component {
     });
   };
 
+  resetCurrentPage = () => {
+    this.setState({
+      currentPage: 1
+    });
+  };
+
   render() {
     const indexOfLastProject =
       this.state.currentPage * this.state.projectsPerPage;
