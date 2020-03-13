@@ -1,6 +1,5 @@
 body {
   font-family: sans-serif;
-  
 }
 
 .add-project {
@@ -14,43 +13,20 @@ body {
   padding: 20px;
   pointer-events: none;
 }
-.App{
-  background-image: url("./photo-1542737579-ba0a385f3b84.jpeg");
-  background-size: 100% auto;
+
+.btn-link {
+  color: #6c757d !important;
 }
-/* #dropdown-basic-button {
-  background-color: #343434 !important;
-  border-color: #343434 !important;
-} */
 
 .dropdown-menu {
   transform: translate3d(5px, 35px, 0px) !important;
 }
 
-/* .form-control {
-  background-color: #343434 !important;
-  border-color: #343434 !important;
-  color: white !important;
-} */
-
-/* .form-control:focus {
-  box-shadow: 0 0 3px #545454 inset !important;
-  outline: none;
-} */
-
-/* ::placeholder {
-  color: white !important;
-} */
-
 .card {
-  /* perspective: 500px; */
   transition: transform 1s;
-  /* height: 370px !important;
-  width: auto; */
   border: none !important;
   border-radius: 0 !important;
   box-shadow: 4px 10px 10px 4px #afafaf;
-  /* overflow: auto; */
 }
 .card:active {
   transform: rotateY(180deg);
@@ -66,22 +42,20 @@ body {
   font-size: 2rem !important;
 }
 
-.btn-link {
-  color: #26bde2 !important;
-}
-
 .card-body {
   flex: none !important;
   padding-top: 0px !important;
+}
+
+.card-column .card {
+  orphans: 1 !important;
+  widows: 1 !important;
 }
 
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
   .card-column .card {
     column-count: auto;
-  }
-  .card-title {
-    /* font-size: 10px !important; */
   }
 }
 @media screen and (min-width: 800px) {
