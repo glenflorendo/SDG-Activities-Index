@@ -12,17 +12,17 @@ class Project extends React.Component {
     projectsPerPage: 11
   };
 
-  flipCard = id => {
-    let cardHeight = document.getElementById(id).offsetHeight;
-    console.log(cardHeight);
+  flipCard = data => {
+    console.log(data);
+    let cardHeight = document.getElementById(data).offsetHeight;
     this.setState(prevState => ({
       flipped: {
         ...prevState.flipped,
-        [id]: !prevState.flipped[id]
+        [data]: !prevState.flipped[data]
       },
       height: {
         ...prevState.height,
-        [id]: cardHeight
+        [data]: cardHeight
       }
     }));
   };
@@ -101,9 +101,9 @@ class Project extends React.Component {
     return (
       <div className={style.projects}>
         <Container>
-        {/* <Row className="justify-content-right">
-            <Pagination size="lg">{this.getPages()}</Pagination>
-          </Row> */}
+        <Row className="justify-content-end">
+            <Pagination >{this.getPages()}</Pagination>
+          </Row>
           <CardColumns>
             {currentProjects.map((data, index) => (
               <Fade key={data.id} bottom>
@@ -180,7 +180,9 @@ class Project extends React.Component {
               </Fade>
             ))}
           </CardColumns>
-         
+         <Row className="justify-content-center">
+            <Pagination >{this.getPages()}</Pagination>
+          </Row>
         </Container>
       </div>
     );
