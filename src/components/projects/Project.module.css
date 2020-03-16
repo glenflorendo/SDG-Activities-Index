@@ -1,6 +1,5 @@
-.sdgImage {
-  height: 40px !important;
-  width: 40px !important;
+.sdgImage:hover{
+  cursor: pointer;
 }
 
 .readMore {
@@ -28,6 +27,10 @@
   margin-top: auto;
 }
 
+.theme:hover{
+  cursor: pointer;
+}
+
 .flipIcon{
   margin-bottom: 10px;
    float: right 
@@ -35,4 +38,8 @@
 
 .flipIcon:hover{
   cursor:pointer;
+}
+
+.sector:hover{
+  cursor: pointer;
 }

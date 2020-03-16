@@ -47,6 +47,7 @@ class Project extends React.Component {
         width="auto"
         height="60"
         alt="goal"
+        className={style.sdgImage}
       />
     ));
     return sdgImages;
@@ -138,6 +139,7 @@ class Project extends React.Component {
                     ></i>
                     <p
                       style={{ color: "#a6a6a6" }}
+                      className={style.sector}
                       onClick={() => this.props.selectSector(data.sector)}
                     >
                       {data.sector}
