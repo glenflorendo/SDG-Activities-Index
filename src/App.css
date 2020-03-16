@@ -23,19 +23,15 @@ body {
 }
 
 .card {
-  transition: transform 1s;
+  /* transition: transform 1s; */
   border: none !important;
   border-radius: 0 !important;
   box-shadow: 4px 10px 10px 4px #afafaf;
 }
-.card:active {
+/* .card:active {
   transform: rotateY(180deg);
   transition: transform 1s;
-}
-
-.card:hover {
-  cursor: pointer;
-}
+} */
 
 .card-title {
   font-weight: 200 !important;
@@ -45,11 +41,6 @@ body {
 .card-body {
   flex: none !important;
   padding-top: 0px !important;
-}
-
-.card-column .card {
-  orphans: 1 !important;
-  widows: 1 !important;
 }
 
 @media only screen and (max-width: 768px) {

@@ -34,12 +34,20 @@ class Project extends React.Component {
     projectSDGsArr.forEach(projectSDG =>
       sdgArray.forEach(sdg => {
         if (projectSDG === sdg.id) {
-          finalArray.push(sdg.image);
+          const sdgData = { image: sdg.image, sdg};
+          finalArray.push(sdgData);
         }
       })
     );
     const sdgImages = finalArray.map((data, index) => (
-      <img key={index} src={data} width="auto" height="60" alt="goal" />
+      <img
+        key={index}
+        onClick={() => this.props.selectGoal(data.sdg, index)}
+        src={data.image}
+        width="auto"
+        height="60"
+        alt="goal"
+      />
     ));
     return sdgImages;
   };
@@ -47,7 +55,11 @@ class Project extends React.Component {
   displayThemes = themes => {
     let themesArr = themes.split(",");
     const themesDisplay = themesArr.map((data, index) => (
-      <span key={index} className={style.theme}>
+      <span
+        key={index}
+        className={style.theme}
+        onClick={() => this.props.selectTheme(data)}
+      >
         {" "}
         {data}
       </span>
@@ -101,87 +113,97 @@ class Project extends React.Component {
     return (
       <div className={style.projects}>
         <Container>
-        <Row className="justify-content-end">
-            <Pagination >{this.getPages()}</Pagination>
+          <Row className="justify-content-end">
+            <Pagination>{this.getPages()}</Pagination>
           </Row>
           <CardColumns>
             {currentProjects.map((data, index) => (
               <Fade key={data.id} bottom>
-                <div
-                  onClick={() => this.flipCard(data.id)}
-                  className={style.card}
-                >
-                  {!this.state.flipped[data.id] ? (
-                    <Card
+                {/* <div className={style.card}> */}
+                {!this.state.flipped[data.id] ? (
+                  <Card
+                    style={{
+                      marginTop: "20px",
+                      textAlign: "center"
+                    }}
+                    className="mb-4 p-3"
+                    id={data.id}
+                  >
+                    <i
+                      className={`${style.flipIcon} fas fa-undo`}
                       style={{
-                        marginTop: "20px",
-                        textAlign: "center"
+                        color: "#455262"
                       }}
-                      className="mb-4 p-3"
-                      id={data.id}
+                      onClick={() => this.flipCard(data.id)}
+                    ></i>
+                    <p
+                      style={{ color: "#a6a6a6" }}
+                      onClick={() => this.props.selectSector(data.sector)}
                     >
-                      <p style={{ color: "#a6a6a6" }}>{data.sector}</p>
-                      <Card.Body>
-                        <Card.Title
-                          style={{
-                            fontSize: "20px",
-                            color:
-                              data.activitytype === "organization"
-                                ? "#ff9244"
-                                : "#2c88c8"
-                          }}
-                        >
-                          {data.projectname}
-                        </Card.Title>
-                        <Card.Text>{data.organization}</Card.Text>
-                      </Card.Body>
-                      <Card.Text>{this.getSdgImages(data.sdg)}</Card.Text>
-                      <div
-                        className={style.themes}
-                        style={{ display: "inline-block" }}
+                      {data.sector}
+                    </p>
+
+                    <Card.Body>
+                      <Card.Title
+                        style={{
+                          fontSize: "20px",
+                          color:
+                            data.activitytype === "organization"
+                              ? "#ff9244"
+                              : "#2c88c8"
+                        }}
                       >
-                        {this.displayThemes(data.theme)}
-                      </div>
-                    </Card>
-                  ) : (
-                    <Card
-                      style={{
-                        height: this.state.height[data.id],
-                        overflow: "auto",
-                        color: "white",
-                        marginTop: "20px",
-                        textAlign: "center",
-                        backgroundColor:
-                          data.activitytype === "organization"
-                            ? "#ff9244"
-                            : "#2c88c8"
-                      }}
-                      className="p-3"
-                      id={data.id}
-                    >
-                      <i
-                        className="fas fa-undo"
-                        style={{ marginBottom: "10px" }}
-                      ></i>
-                      <Card.Title>{data.projectname}</Card.Title>
+                        {data.projectname}
+                      </Card.Title>
                       <Card.Text>{data.organization}</Card.Text>
-                      <small>{data.description}</small>
-                      <br />
-                      <a
-                        className={style.readMore}
-                        href={`${data.website}`}
-                        target="_blank"
-                      >
-                        Read More
-                      </a>
-                    </Card>
-                  )}
-                </div>
+                    </Card.Body>
+                    <Card.Text>{this.getSdgImages(data.sdg)}</Card.Text>
+                    <div
+                      className={style.themes}
+                      style={{ display: "inline-block" }}
+                    >
+                      {this.displayThemes(data.theme)}
+                    </div>
+                  </Card>
+                ) : (
+                  <Card
+                    style={{
+                      height: this.state.height[data.id],
+                      overflow: "auto",
+                      color: "white",
+                      marginTop: "20px",
+                      textAlign: "center",
+                      backgroundColor:
+                        data.activitytype === "organization"
+                          ? "#ff9244"
+                          : "#2c88c8"
+                    }}
+                    className="p-3"
+                    id={data.id}
+                  >
+                    <i
+                      className={`${style.flipIcon} fas fa-undo`}
+                      onClick={() => this.flipCard(data.id)}
+                    ></i>
+                    <Card.Title>{data.projectname}</Card.Title>
+                    <Card.Text>{data.organization}</Card.Text>
+                    <small>{data.description}</small>
+                    <br />
+                    <a
+                      className={style.readMore}
+                      href={`${data.website}`}
+                      target="_blank"
+                    >
+                      Read More
+                    </a>
+                  </Card>
+                )}
+                {/* </div> */}
               </Fade>
             ))}
           </CardColumns>
-         <Row className="justify-content-center">
-            <Pagination >{this.getPages()}</Pagination>
+          <Row className="justify-content-center">
+            <Pagination>{this.getPages()}</Pagination>
           </Row>
         </Container>
       </div>
