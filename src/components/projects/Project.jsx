@@ -133,12 +133,12 @@ class Project extends React.Component {
                     <i
                       className={`${style.flipIcon} fas fa-undo`}
                       style={{
-                        color: "#455262"
+                        color: "#a6a6a6"
                       }}
                       onClick={() => this.flipCard(data.id)}
                     ></i>
                     <p
-                      style={{ color: "#a6a6a6" }}
+                      style={{ color: "#455262" }}
                       className={style.sector}
                       onClick={() => this.props.selectSector(data.sector)}
                     >
