@@ -13,6 +13,7 @@ import {
   Row,
   Col
 } from "react-bootstrap";
+import SdgDescription from "./components/sdg-description/SdgDescription";
 
 class App extends React.Component {
   constructor(props) {
@@ -29,7 +30,10 @@ class App extends React.Component {
       searchError: false,
       loading: true,
       filters: [],
-      active: {}
+      active: {},
+      goalDescription: "",
+      goalImage: null,
+      goalColor: ""
     };
   }
 
@@ -121,6 +125,7 @@ class App extends React.Component {
   };
 
   goalSelected = (data, index) => {
+    console.log(data);
     const goalArr = this.state.projects.filter(project =>
       project.sdg.split(",").includes(data.id)
     );
@@ -129,7 +134,10 @@ class App extends React.Component {
       searchError: false,
       active: {
         [index]: !prevState.active[index]
-      }
+      },
+      goalDescription: data.description,
+      goalImage: data.image,
+      goalColor: data.color
     }));
     this.resetPage.current.resetCurrentPage();
   };
@@ -220,11 +228,15 @@ class App extends React.Component {
           active={this.state.active}
         />
         <br />
+        <SdgDescription
+          goalDescription={this.state.goalDescription}
+          goalImage={this.state.goalImage}
+          goalColor={this.state.goalColor}
+        />
         {this.state.searchError ? (
           <Container>
             <Row className="justify-content-md-center">
               <Col>
-                {" "}
                 <Alert variant="danger">
                   No cards match your search. Please try filtering for the
                   content you are looking for.

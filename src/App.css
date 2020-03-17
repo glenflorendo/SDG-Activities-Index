@@ -48,6 +48,7 @@ body {
   .card-column .card {
     column-count: auto;
   }
+ 
 }
 @media screen and (min-width: 800px) {
   .filterBy {
