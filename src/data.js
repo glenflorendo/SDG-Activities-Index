@@ -4,7 +4,9 @@ const { promisify } = require("util");
 
 async function getSpreadsheet() {
   const doc = new GoogleSpreadsheet(
-    `1UFYSr59H54aSMYiuGEbqOKUL41ddEhuYbQZplmhG8qs`
+    `1UFYSr59H54aSMYiuGEbqOKUL41ddEhuYbQZplmhG8qs`,
+    null,
+    { gzip: false }
   );
   await promisify(doc.useServiceAccountAuth)(cred).catch(err =>
     console.log("Google Sheets Authentication Error")
@@ -17,7 +19,9 @@ async function getSpreadsheet() {
 
 async function getGoals() {
   const sdgDoc = new GoogleSpreadsheet(
-    `1UFYSr59H54aSMYiuGEbqOKUL41ddEhuYbQZplmhG8qs`
+    `1UFYSr59H54aSMYiuGEbqOKUL41ddEhuYbQZplmhG8qs`,
+    null,
+    { gzip: false }
   );
   await promisify(sdgDoc.useServiceAccountAuth)(cred).catch(err =>
     console.log("Google Sheets Authentication Error")
@@ -30,7 +34,9 @@ async function getGoals() {
 
 async function addProject(data) {
   const doc = new GoogleSpreadsheet(
-    `1UFYSr59H54aSMYiuGEbqOKUL41ddEhuYbQZplmhG8qs`
+    `1UFYSr59H54aSMYiuGEbqOKUL41ddEhuYbQZplmhG8qs`,
+    null,
+    { gzip: false }
   );
   await promisify(doc.useServiceAccountAuth)(cred).catch(err =>
     console.log("Google Sheets Authentication Error")

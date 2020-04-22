@@ -74,62 +74,46 @@ class App extends React.Component {
   };
 
   themeSelected = data => {
-    const themeArr = this.state.projects.filter(project =>
+    const themeArr = this.state.projectsDisplay.filter(project =>
       project.theme.includes(data)
     );
     this.setState(prevState => ({
+      filters: this.state.filters.concat(data),
       projectsDisplay: themeArr,
-      searchError: false,
       active: {
         [data]: !prevState.active[data]
-      }
+      },
+      searchError: false,
+      goalDescription: "",
+      goalImage: null,
+      goalColor: ""
     }));
-
-    this.resetPage.current.resetCurrentPage();
   };
 
   sectorSelected = data => {
-    const sectorArr = this.state.projects.filter(
+    const sectorArr = this.state.projectsDisplay.filter(
       project => project.sector === data
     );
     this.setState(prevState => ({
+      filters: this.state.filters.concat(data),
       projectsDisplay: sectorArr,
-      searchError: false,
       active: {
         [data]: !prevState.active[data]
-      }
+      },
+      searchError: false,
+      goalDescription: "",
+      goalImage: null,
+      goalColor: "",
+      sectorDropdown: true
     }));
-    this.resetPage.current.resetCurrentPage();
-  };
-
-  projectsSelected = () => {
-    const projectsArr = this.state.projects.filter(
-      project => project.activitytype === "project"
-    );
-    this.setState({
-      projectsDisplay: projectsArr,
-      searchError: false
-    });
-    this.resetPage.current.resetCurrentPage();
-  };
-
-  organizationsSelected = () => {
-    const organizationsArr = this.state.projects.filter(
-      project => project.activitytype === "organization"
-    );
-    this.setState({
-      projectsDisplay: organizationsArr,
-      searchError: false
-    });
-    this.resetPage.current.resetCurrentPage();
   };
 
   goalSelected = (data, index) => {
-    console.log(data);
-    const goalArr = this.state.projects.filter(project =>
+    const goalArr = this.state.projectsDisplay.filter(project =>
       project.sdg.split(",").includes(data.id)
     );
     this.setState(prevState => ({
+      filters: this.state.filters.concat(data.name),
       projectsDisplay: goalArr,
       searchError: false,
       active: {
@@ -142,10 +126,30 @@ class App extends React.Component {
     this.resetPage.current.resetCurrentPage();
   };
 
-  resetFilter = () => {
+  projectsSelected = () => {
+    const projectsArr = this.state.projectsDisplay.filter(
+      project => project.activitytype === "project"
+    );
     this.setState({
-      projectsDisplay: this.state.projects,
-      searchError: false
+      projectsDisplay: projectsArr,
+      searchError: false,
+      goalDescription: "",
+      goalImage: null,
+      goalColor: ""
+    });
+    this.resetPage.current.resetCurrentPage();
+  };
+
+  organizationsSelected = () => {
+    const organizationsArr = this.state.projectsDisplay.filter(
+      project => project.activitytype === "organization"
+    );
+    this.setState({
+      projectsDisplay: organizationsArr,
+      searchError: false,
+      goalDescription: "",
+      goalImage: null,
+      goalColor: ""
     });
     this.resetPage.current.resetCurrentPage();
   };
@@ -153,7 +157,7 @@ class App extends React.Component {
   handleSearch = value => {
     const searchArr = this.state.projects.filter(entry =>
       Object.values(entry).some(
-        val => typeof val === "string" && val.toLowerCase().includes(value)
+        val => typeof val === "string" && val.includes(value)
       )
     );
     this.setState({
@@ -168,12 +172,34 @@ class App extends React.Component {
     this.resetPage.current.resetCurrentPage();
   };
 
+  resetFilter = () => {
+    this.setState({
+      projectsDisplay: this.state.projects,
+      searchError: false,
+      filters: [],
+      goalDescription: "",
+      goalImage: null,
+      goalColor: ""
+    });
+    this.resetPage.current.resetCurrentPage();
+  };
+
   handleShow = () => {
     this.setState({ modal: true });
   };
 
   handleClose = () => {
     this.setState({ modal: false });
+  };
+
+  deleteFilter = value => {
+    // const matches = this.state.projects.filter(project =>
+    //   this.state.filters.every(tag => Object.values(project).includes(tag))
+    // );
+    this.setState(prevState => ({
+      filters: prevState.filters.filter(item => item !== value)
+      // projectsDisplay: matches
+    }));
   };
 
   render() {
@@ -215,6 +241,7 @@ class App extends React.Component {
           </Modal>
         </div>
         <FilterMenu
+          selectedItem={this.itemSelected}
           themes={this.state.themes}
           sectors={this.state.sectors}
           selectTheme={this.themeSelected}
@@ -224,6 +251,9 @@ class App extends React.Component {
           selectOrganizations={this.organizationsSelected}
           resetFilter={this.resetFilter}
           goals={this.state.goals}
+          filters={this.state.filters}
+          deleteFilter={this.deleteFilter}
+          projects={this.state.projectsDisplay}
           selectGoal={this.goalSelected}
           active={this.state.active}
         />

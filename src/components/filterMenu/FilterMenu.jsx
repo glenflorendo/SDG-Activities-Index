@@ -8,6 +8,7 @@ import {
   Button,
   Container
 } from "react-bootstrap";
+import style from "./FilterMenu.module.css";
 
 class FilterMenu extends Component {
   constructor(props) {
@@ -41,6 +42,8 @@ class FilterMenu extends Component {
     var keyword = this.keyword.current.value;
     this.props.searchProjects(keyword);
   }
+
+ 
 
   render() {
     return (
@@ -129,7 +132,7 @@ class FilterMenu extends Component {
             <Col xs lg="3">
               <Form.Group controlId="projectsCheckbox">
                 <Form.Check
-                  type="checkbox"
+                  type="radio"
                   label="Projects"
                   style={{ color: "#2c88c8" }}
                   checked={this.state.isChecked}
@@ -140,7 +143,7 @@ class FilterMenu extends Component {
             <Col xs lg="3">
               <Form.Group controlId="orgsCheckbox">
                 <Form.Check
-                  type="checkbox"
+                  type="radio"
                   label="Organizations"
                   style={{ color: "#ff9244" }}
                   checked={this.state.orgsChecked}
@@ -153,6 +156,16 @@ class FilterMenu extends Component {
                 Reset Filter
               </Button>
             </Col>
+          </Row>
+          <Row>
+            {this.props.filters.map((filter, index) => (
+              <div key={index} >
+                <span className={style.filter}>
+                  {filter} 
+                  {/* <span onClick= {()=>this.props.deleteFilter(filter)}>x</span>{" "} */}
+                </span>
+              </div>
+            ))}
           </Row>
         </Container>
       </div>
