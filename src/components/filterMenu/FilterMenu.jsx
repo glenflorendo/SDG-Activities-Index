@@ -43,8 +43,6 @@ class FilterMenu extends Component {
     this.props.searchProjects(keyword);
   }
 
- 
-
   render() {
     return (
       <div style={{ marginTop: "20px" }}>
@@ -159,10 +157,13 @@ class FilterMenu extends Component {
           </Row>
           <Row>
             {this.props.filters.map((filter, index) => (
-              <div key={index} >
-                <span className={style.filter}>
-                  {filter} 
-                  {/* <span onClick= {()=>this.props.deleteFilter(filter)}>x</span>{" "} */}
+              <div key={index}>
+                <span
+                  className={style.filter}
+                  onClick={() => this.props.deleteFilter(filter)}
+                >
+                  {filter}
+                  <span onClick={() => this.props.deleteFilter(filter)}>x</span>
                 </span>
               </div>
             ))}

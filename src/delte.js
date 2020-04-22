@@ -33,14 +33,7 @@ class App extends React.Component {
       active: {},
       goalDescription: "",
       goalImage: null,
-      goalColor: "",
-      //Dropdown Mess
-      projectsArr: [],
-      themeDropdown: false,
-      sectorDropdown: false,
-      sdgDropdown: false,
-      projectsCheck: false,
-      orgsCheck: false
+      goalColor: ""
     };
   }
 
@@ -81,198 +74,84 @@ class App extends React.Component {
   };
 
   themeSelected = data => {
-    const filterList = this.state.filters.concat(data);
-    this.setState(
-      prevState => ({
-        filters: filterList,
-        active: {
-          [data]: !prevState.active[data]
-        },
-        themeDropdown: true
-      }),
-      () => this.filterProjects(data)
+    const themeArr = this.state.projectsDisplay.filter(project =>
+      project.theme.includes(data)
     );
-    // const themeArr = this.state.projectsDisplay.filter(project =>
-    //   project.theme.includes(data)
-    // );
-    // this.setState(prevState => ({
-    //   filters: this.state.filters.concat(data),
-    //   projectsDisplay: themeArr,
-    //   active: {
-    //     [data]: !prevState.active[data]
-    //   },
-    //   searchError: false,
-    //   goalDescription: "",
-    //   goalImage: null,
-    //   goalColor: ""
-    // }));
+    this.setState(prevState => ({
+      filters: Array.from(new Set(this.state.filters.concat(data))),
+      projectsDisplay: themeArr,
+      active: {
+        [data]: !prevState.active[data]
+      },
+      searchError: false,
+      goalDescription: "",
+      goalImage: null,
+      goalColor: ""
+    }));
   };
 
   sectorSelected = data => {
-    const filterList = this.state.filters.concat(data);
-    this.setState(
-      prevState => ({
-        filters: filterList,
-        active: {
-          [data]: !prevState.active[data]
-        },
-        themeDropdown: false,
-        sectorDropdown: true
-      }),
-      () => this.filterProjects(data)
+    const sectorArr = this.state.projectsDisplay.filter(
+      project => project.sector === data
     );
-    // const sectorArr = this.state.projectsDisplay.filter(
-    //   project => project.sector === data
-    // );
-    // this.setState(prevState => ({
-    //   filters: this.state.filters.concat(data),
-    //   projectsDisplay: sectorArr,
-    //   active: {
-    //     [data]: !prevState.active[data]
-    //   },
-    //   searchError: false,
-    //   goalDescription: "",
-    //   goalImage: null,
-    //   goalColor: "",
-    //   sectorDropdown: true
-    // }));
+    this.setState(prevState => ({
+      filters: Array.from(new Set(this.state.filters.concat(data))),
+      projectsDisplay: sectorArr,
+      active: {
+        [data]: !prevState.active[data]
+      },
+      searchError: false,
+      goalDescription: "",
+      goalImage: null,
+      goalColor: "",
+      sectorDropdown: true
+    }));
   };
 
   goalSelected = (data, index) => {
-    const filterList = this.state.filters.concat(data.name);
-    this.setState(
-      prevState => ({
-        filters: filterList,
-        active: {
-          [index]: !prevState.active[index]
-        },
-        themeDropdown: false,
-        sectorDropdown: false,
-        sdgDropdown: true
-      }),
-      () => this.filterProjects(data)
+    const goalArr = this.state.projectsDisplay.filter(project =>
+      project.sdg.split(",").includes(data.id)
     );
-    // const goalArr = this.state.projectsDisplay.filter(project =>
-    //   project.sdg.split(",").includes(data.id)
-    // );
-    // this.setState(prevState => ({
-    //   filters: this.state.filters.concat(data.name),
-    //   projectsDisplay: goalArr,
-    //   searchError: false,
-    //   active: {
-    //     [index]: !prevState.active[index]
-    //   },
-    //   goalDescription: data.description,
-    //   goalImage: data.image,
-    //   goalColor: data.color
-    // }));
-    // this.resetPage.current.resetCurrentPage();
+    this.setState(prevState => ({
+      filters: Array.from(new Set(this.state.filters.concat(data.name))),
+      projectsDisplay: goalArr,
+      searchError: false,
+      active: {
+        [index]: !prevState.active[index]
+      },
+      goalDescription: data.description,
+      goalImage: data.image,
+      goalColor: data.color
+    }));
+    this.resetPage.current.resetCurrentPage();
   };
 
   projectsSelected = () => {
-    const filterList = this.state.filters.concat("Projects");
-    this.setState(
-      {
-        filters: filterList,
-        themeDropdown: false,
-        sectorDropdown: false,
-        sdgDropdown: false,
-        projectsCheck: true
-      },
-      () => this.filterProjects("project")
+    const projectsArr = this.state.projectsDisplay.filter(
+      project => project.activitytype === "project"
     );
-    // const projectsArr = this.state.projectsDisplay.filter(
-    //   project => project.activitytype === "project"
-    // );
-    // this.setState({
-    //   projectsDisplay: projectsArr,
-    //   searchError: false,
-    //   goalDescription: "",
-    //   goalImage: null,
-    //   goalColor: ""
-    // });
-    // this.resetPage.current.resetCurrentPage();
+    this.setState({
+      projectsDisplay: projectsArr,
+      searchError: false,
+      goalDescription: "",
+      goalImage: null,
+      goalColor: ""
+    });
+    this.resetPage.current.resetCurrentPage();
   };
 
   organizationsSelected = () => {
-    const filterList = this.state.filters.concat("Organizations");
-    this.setState(
-      {
-        filters: filterList,
-        themeDropdown: false,
-        sectorDropdown: false,
-        sdgDropdown: false,
-        projectsCheck: false,
-        orgsCheck: true
-      },
-      () => this.filterProjects("organization")
+    const organizationsArr = this.state.projectsDisplay.filter(
+      project => project.activitytype === "organization"
     );
-    // const organizationsArr = this.state.projectsDisplay.filter(
-    //   project => project.activitytype === "organization"
-    // );
-    // this.setState({
-    //   projectsDisplay: organizationsArr,
-    //   searchError: false,
-    //   goalDescription: "",
-    //   goalImage: null,
-    //   goalColor: ""
-    // });
-    // this.resetPage.current.resetCurrentPage();
-  };
-
-  filterProjects = data => {
-    if (this.state.themeDropdown === true) {
-      const themeArr = this.state.projects.filter(project =>
-        project.theme.includes(data)
-      );
-      this.setState({
-        projectsArr: this.state.projectsArr.concat(themeArr)
-      });
-    } else if (this.state.sectorDropdown === true) {
-      console.log(data);
-      // const letters = ["a", "b", "c"];
-      // projectsArr.concat(letters);
-      const sectorArr = this.state.projects.filter(
-        project => project.sector === data
-      );
-      this.setState({
-        projectsArr: this.state.projectsArr.concat(sectorArr)
-      });
-    } else if (this.state.sdgDropdown === true) {
-      const goalArr = this.state.projects.filter(project =>
-        project.sdg.split(",").includes(data.id)
-      );
-      this.setState({
-        projectsArr: this.state.projectsArr.concat(goalArr)
-      });
-    } else if (this.state.projectsCheck === true) {
-      const projectsArr = this.state.projects.filter(
-        project => project.activitytype === "project"
-      );
-      this.setState({
-        projectsArr: this.state.projectsArr.concat(projectsArr)
-      });
-    } else if (this.state.orgsCheck === true) {
-      const organizationsArr = this.state.projects.filter(
-        project => project.activitytype === "organization"
-      );
-      this.setState({
-        projectsArr: this.state.projectsArr.concat(organizationsArr)
-      });
-    }
-    //   // console.log(this.state.filters);
-    //   const matches = this.state.projects.filter(project =>
-    //     this.state.filters.every(tag => Object.values(project).includes(tag))
-    //   );
-    //   console.log(matches);
-    //   this.setState({
-    //     projectsDisplay: matches,
-    //     searchError: false,
-    //     goalDescription: "",
-    //     goalImage: null,
-    //     goalColor: ""
-    //   });
-    //   this.resetPage.current.resetCurrentPage();
+    this.setState({
+      projectsDisplay: organizationsArr,
+      searchError: false,
+      goalDescription: "",
+      goalImage: null,
+      goalColor: ""
+    });
+    this.resetPage.current.resetCurrentPage();
   };
 
   handleSearch = value => {
@@ -407,6 +286,8 @@ class App extends React.Component {
           >
             <span className="sr-only">Loading...</span>
           </Spinner>
+        ) : this.state.filters.length === 0 ? (
+          <h1>Please reset filter</h1>
         ) : (
           <Project
             projects={this.state.projectsDisplay}

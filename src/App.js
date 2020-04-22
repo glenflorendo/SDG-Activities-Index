@@ -23,17 +23,22 @@ class App extends React.Component {
       projects: [],
       projectsDisplay: [],
       themes: [],
-      theme: "",
       sectors: [],
       goals: [],
       modal: false,
       searchError: false,
       loading: true,
-      filters: [],
       active: {},
       goalDescription: "",
       goalImage: null,
-      goalColor: ""
+      goalColor: "",
+      //Filters
+      filters: [],
+
+      theme: "",
+      sdg: "",
+      sector: "",
+      activitytype: ""
     };
   }
 
@@ -74,82 +79,95 @@ class App extends React.Component {
   };
 
   themeSelected = data => {
-    const themeArr = this.state.projectsDisplay.filter(project =>
-      project.theme.includes(data)
+    const filterList = this.state.filters.concat(data);
+    this.setState(
+      prevState => ({
+        filters: filterList,
+        active: {
+          [data]: !prevState.active[data]
+        },
+        theme: data
+      }),
+      () => this.filterProjects()
     );
-    this.setState(prevState => ({
-      filters: this.state.filters.concat(data),
-      projectsDisplay: themeArr,
-      active: {
-        [data]: !prevState.active[data]
-      },
-      searchError: false,
-      goalDescription: "",
-      goalImage: null,
-      goalColor: ""
-    }));
   };
 
   sectorSelected = data => {
-    const sectorArr = this.state.projectsDisplay.filter(
-      project => project.sector === data
+    const filterList = this.state.filters.concat(data);
+    this.setState(
+      prevState => ({
+        filters: filterList,
+        active: {
+          [data]: !prevState.active[data]
+        },
+        sector: data
+      }),
+      () => this.filterProjects()
     );
-    this.setState(prevState => ({
-      filters: this.state.filters.concat(data),
-      projectsDisplay: sectorArr,
-      active: {
-        [data]: !prevState.active[data]
-      },
-      searchError: false,
-      goalDescription: "",
-      goalImage: null,
-      goalColor: "",
-      sectorDropdown: true
-    }));
   };
 
   goalSelected = (data, index) => {
-    const goalArr = this.state.projectsDisplay.filter(project =>
-      project.sdg.split(",").includes(data.id)
+    const filterList = this.state.filters.concat(data.name);
+    this.setState(
+      prevState => ({
+        filters: filterList,
+        active: {
+          [index]: !prevState.active[index]
+        },
+        sdg: data.id
+      }),
+      () => this.filterProjects()
     );
-    this.setState(prevState => ({
-      filters: this.state.filters.concat(data.name),
-      projectsDisplay: goalArr,
-      searchError: false,
-      active: {
-        [index]: !prevState.active[index]
-      },
-      goalDescription: data.description,
-      goalImage: data.image,
-      goalColor: data.color
-    }));
-    this.resetPage.current.resetCurrentPage();
   };
 
   projectsSelected = () => {
-    const projectsArr = this.state.projectsDisplay.filter(
-      project => project.activitytype === "project"
+    const filterList = this.state.filters.concat("Projects");
+    this.setState(
+      {
+        filters: filterList,
+        activitytype: "project"
+      },
+      () => this.filterProjects()
     );
-    this.setState({
-      projectsDisplay: projectsArr,
-      searchError: false,
-      goalDescription: "",
-      goalImage: null,
-      goalColor: ""
-    });
-    this.resetPage.current.resetCurrentPage();
   };
 
   organizationsSelected = () => {
-    const organizationsArr = this.state.projectsDisplay.filter(
-      project => project.activitytype === "organization"
+    const filterList = this.state.filters.concat("Organizations");
+    this.setState(
+      {
+        filters: filterList,
+        activitytype: "organization"
+      },
+      () => this.filterProjects()
     );
+  };
+
+  filterProjects = () => {
+    let result = this.state.projects;
+
+    if (this.state.theme) {
+      result = result.filter(project =>
+        project.theme.includes(this.state.theme)
+      );
+    }
+    if (this.state.sdg) {
+      result = result.filter(project =>
+        project.sdg.split(",").includes(this.state.sdg)
+      );
+    }
+    if (this.state.sector) {
+      result = result.filter(project => project.sector === this.state.sector);
+    }
+    if (this.state.activitytype) {
+      if (this.state.activitytype === "project") {
+        result = result.filter(project => project.activitytype === "project");
+      }
+      if (this.state.activitytype === "organization") {
+        result = result.filter(project => project.activitytype === "project");
+      }
+    }
     this.setState({
-      projectsDisplay: organizationsArr,
-      searchError: false,
-      goalDescription: "",
-      goalImage: null,
-      goalColor: ""
+      projectsDisplay: result
     });
     this.resetPage.current.resetCurrentPage();
   };
@@ -193,13 +211,13 @@ class App extends React.Component {
   };
 
   deleteFilter = value => {
-    // const matches = this.state.projects.filter(project =>
-    //   this.state.filters.every(tag => Object.values(project).includes(tag))
-    // );
-    this.setState(prevState => ({
-      filters: prevState.filters.filter(item => item !== value)
-      // projectsDisplay: matches
-    }));
+    console.log(value);
+    this.setState(
+      prevState => ({
+        filters: prevState.filters.filter(item => item !== value)
+      }),
+      () => this.filterProjects()
+    );
   };
 
   render() {
@@ -241,7 +259,7 @@ class App extends React.Component {
           </Modal>
         </div>
         <FilterMenu
-          selectedItem={this.itemSelected}
+          // selectedItem={this.itemSelected}
           themes={this.state.themes}
           sectors={this.state.sectors}
           selectTheme={this.themeSelected}
