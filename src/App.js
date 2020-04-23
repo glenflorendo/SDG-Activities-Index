@@ -160,7 +160,13 @@ class App extends React.Component {
     }
     this.setState({
       projectsDisplay: result,
+      searchError: false,
     });
+    if (result.length === 0) {
+      this.setState({
+        searchError: true,
+      });
+    }
     this.resetPage.current.resetCurrentPage();
   };
 
@@ -285,8 +291,7 @@ class App extends React.Component {
             <Row className="justify-content-md-center">
               <Col>
                 <Alert variant="danger">
-                  No cards match your search. Please try filtering for the
-                  content you are looking for.
+                  No cards match your search. Please try redefining your criteria.
                 </Alert>
               </Col>
             </Row>
