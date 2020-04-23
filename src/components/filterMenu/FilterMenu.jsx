@@ -6,7 +6,7 @@ import {
   Col,
   Form,
   Button,
-  Container
+  Container,
 } from "react-bootstrap";
 import style from "./FilterMenu.module.css";
 
@@ -16,7 +16,7 @@ class FilterMenu extends Component {
     this.keyword = React.createRef();
     this.state = {
       isChecked: false,
-      orgsChecked: false
+      orgsChecked: false,
     };
   }
 
@@ -47,15 +47,15 @@ class FilterMenu extends Component {
     return (
       <div style={{ marginTop: "20px" }}>
         <Container>
-          <Row>
-            <Col className="offset-lg-2">
+          <Row style={{ textAlign: "center" }}>
+            <Col>
               <h5 className="filterBy">Filter By</h5>
             </Col>
           </Row>
           <Row className="justify-content-center">
             <Col xs="12" lg="4">
               <Form
-                onSubmit={e => {
+                onSubmit={(e) => {
                   e.preventDefault();
                 }}
               >
@@ -69,12 +69,12 @@ class FilterMenu extends Component {
                 </Form.Group>
               </Form>
             </Col>
-            <Col xs="3" md="3" lg="1">
+            <Col xs="3" md="3" lg="auto">
               <DropdownButton
                 className="dropdown"
                 variant="secondary"
                 id="dropdown-basic-button"
-                title="SDG"
+                title={this.props.sdgName === "" ? "SDG" : this.props.sdgName}
               >
                 {this.props.goals.map((goal, index) => (
                   <Dropdown.Item
@@ -88,13 +88,13 @@ class FilterMenu extends Component {
                 ))}
               </DropdownButton>
             </Col>
-            <Col xs="3" md="3" lg="1">
+            <Col xs="3" md="3" lg="auto">
               <DropdownButton
                 variant="secondary"
                 id="dropdown-basic-button"
-                title="Theme"
+                title={this.props.theme === "" ? "Theme" : this.props.theme}
               >
-                {this.props.themes.map(theme => (
+                {this.props.themes.map((theme) => (
                   <Dropdown.Item
                     key={theme}
                     onClick={() => this.props.selectTheme(theme)}
@@ -105,13 +105,13 @@ class FilterMenu extends Component {
                 ))}
               </DropdownButton>
             </Col>
-            <Col xs="3" md="3" lg="1">
+            <Col xs="3" md="3" lg="auto">
               <DropdownButton
                 variant="secondary"
                 id="dropdown-basic-button"
-                title="Sector"
+                title={this.props.sector === "" ? "Sector" : this.props.sector}
               >
-                {this.props.sectors.map(sector => (
+                {this.props.sectors.map((sector) => (
                   <Dropdown.Item
                     key={sector}
                     onClick={() => this.props.selectSector(sector)}
@@ -156,7 +156,7 @@ class FilterMenu extends Component {
             </Col>
           </Row>
           <Row>
-            {this.props.filters.map((filter, index) => (
+            {/* {this.props.filters.map((filter, index) => (
               <div key={index}>
                 <span
                   className={style.filter}
@@ -166,7 +166,7 @@ class FilterMenu extends Component {
                   <span onClick={() => this.props.deleteFilter(filter)}>x</span>
                 </span>
               </div>
-            ))}
+            ))} */}
           </Row>
         </Container>
       </div>

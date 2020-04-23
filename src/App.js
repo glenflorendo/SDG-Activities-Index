@@ -11,7 +11,7 @@ import {
   Alert,
   Container,
   Row,
-  Col
+  Col,
 } from "react-bootstrap";
 import SdgDescription from "./components/sdg-description/SdgDescription";
 
@@ -33,12 +33,11 @@ class App extends React.Component {
       goalImage: null,
       goalColor: "",
       //Filters
-      filters: [],
-
       theme: "",
       sdg: "",
+      sdgName: "",
       sector: "",
-      activitytype: ""
+      activitytype: "",
     };
   }
 
@@ -47,10 +46,10 @@ class App extends React.Component {
     spreadsheetData.getGoals().then(this.goalsSuccess);
   };
 
-  spreadsheeetSuccess = data => {
+  spreadsheeetSuccess = (data) => {
     let themesSplit = [];
     let themesList = [];
-    const themesArray = data.map(data => data.theme);
+    const themesArray = data.map((data) => data.theme);
     for (let i = 0; i < themesArray.length; i++) {
       themesSplit.push(themesArray[i].split(","));
     }
@@ -60,7 +59,7 @@ class App extends React.Component {
     }
     const themesArrayNoDuplicates = Array.from(new Set(themesList));
     const themesAlphabetical = themesArrayNoDuplicates.sort();
-    const sectorsArray = data.map(data => data.sector);
+    const sectorsArray = data.map((data) => data.sector);
     const sectorsArrayNoDuplicates = Array.from(new Set(sectorsArray));
     const sectorsAlphabetical = sectorsArrayNoDuplicates.sort();
     this.setState({
@@ -68,75 +67,66 @@ class App extends React.Component {
       projectsDisplay: data,
       themes: themesAlphabetical,
       sectors: sectorsAlphabetical,
-      loading: false
+      loading: false,
     });
   };
 
-  goalsSuccess = data => {
+  goalsSuccess = (data) => {
     this.setState({
-      goals: data
+      goals: data,
     });
   };
 
-  themeSelected = data => {
-    const filterList = this.state.filters.concat(data);
+  themeSelected = (data) => {
     this.setState(
-      prevState => ({
-        filters: filterList,
+      (prevState) => ({
         active: {
-          [data]: !prevState.active[data]
+          [data]: !prevState.active[data],
         },
-        theme: data
+        theme: data,
       }),
       () => this.filterProjects()
     );
   };
 
-  sectorSelected = data => {
-    const filterList = this.state.filters.concat(data);
+  sectorSelected = (data) => {
     this.setState(
-      prevState => ({
-        filters: filterList,
+      (prevState) => ({
         active: {
-          [data]: !prevState.active[data]
+          [data]: !prevState.active[data],
         },
-        sector: data
+        sector: data,
       }),
       () => this.filterProjects()
     );
   };
 
   goalSelected = (data, index) => {
-    const filterList = this.state.filters.concat(data.name);
     this.setState(
-      prevState => ({
-        filters: filterList,
+      (prevState) => ({
         active: {
-          [index]: !prevState.active[index]
+          [index]: !prevState.active[index],
         },
-        sdg: data.id
+        sdg: data.id,
+        sdgName: data.name,
       }),
       () => this.filterProjects()
     );
   };
 
   projectsSelected = () => {
-    const filterList = this.state.filters.concat("Projects");
     this.setState(
       {
-        filters: filterList,
-        activitytype: "project"
+        activitytype: "project",
       },
       () => this.filterProjects()
     );
   };
 
   organizationsSelected = () => {
-    const filterList = this.state.filters.concat("Organizations");
     this.setState(
       {
-        filters: filterList,
-        activitytype: "organization"
+        activitytype: "organization",
       },
       () => this.filterProjects()
     );
@@ -146,45 +136,47 @@ class App extends React.Component {
     let result = this.state.projects;
 
     if (this.state.theme) {
-      result = result.filter(project =>
+      result = result.filter((project) =>
         project.theme.includes(this.state.theme)
       );
     }
     if (this.state.sdg) {
-      result = result.filter(project =>
+      result = result.filter((project) =>
         project.sdg.split(",").includes(this.state.sdg)
       );
     }
     if (this.state.sector) {
-      result = result.filter(project => project.sector === this.state.sector);
+      result = result.filter((project) => project.sector === this.state.sector);
     }
     if (this.state.activitytype) {
       if (this.state.activitytype === "project") {
-        result = result.filter(project => project.activitytype === "project");
+        result = result.filter((project) => project.activitytype === "project");
       }
       if (this.state.activitytype === "organization") {
-        result = result.filter(project => project.activitytype === "project");
+        result = result.filter(
+          (project) => project.activitytype === "organization"
+        );
       }
     }
     this.setState({
-      projectsDisplay: result
+      projectsDisplay: result,
     });
     this.resetPage.current.resetCurrentPage();
   };
 
-  handleSearch = value => {
-    const searchArr = this.state.projects.filter(entry =>
+  handleSearch = (value) => {
+    const searchArr = this.state.projects.filter((entry) =>
       Object.values(entry).some(
-        val => typeof val === "string" && val.includes(value)
+        (val) => typeof val === "string" && val.includes(value)
       )
     );
     this.setState({
       projectsDisplay: searchArr,
-      searchError: false
+      searchError: false,
     });
     if (searchArr.length === 0) {
       this.setState({
-        searchError: true
+        searchError: true,
       });
     }
     this.resetPage.current.resetCurrentPage();
@@ -197,7 +189,12 @@ class App extends React.Component {
       filters: [],
       goalDescription: "",
       goalImage: null,
-      goalColor: ""
+      goalColor: "",
+      theme: "",
+      sdg: "",
+      sdgName: "",
+      sector: "",
+      activitytype: "",
     });
     this.resetPage.current.resetCurrentPage();
   };
@@ -210,11 +207,11 @@ class App extends React.Component {
     this.setState({ modal: false });
   };
 
-  deleteFilter = value => {
+  deleteFilter = (value) => {
     console.log(value);
     this.setState(
-      prevState => ({
-        filters: prevState.filters.filter(item => item !== value)
+      (prevState) => ({
+        filters: prevState.filters.filter((item) => item !== value),
       }),
       () => this.filterProjects()
     );
@@ -259,7 +256,6 @@ class App extends React.Component {
           </Modal>
         </div>
         <FilterMenu
-          // selectedItem={this.itemSelected}
           themes={this.state.themes}
           sectors={this.state.sectors}
           selectTheme={this.themeSelected}
@@ -269,11 +265,14 @@ class App extends React.Component {
           selectOrganizations={this.organizationsSelected}
           resetFilter={this.resetFilter}
           goals={this.state.goals}
-          filters={this.state.filters}
           deleteFilter={this.deleteFilter}
           projects={this.state.projectsDisplay}
           selectGoal={this.goalSelected}
           active={this.state.active}
+          theme={this.state.theme}
+          sdgName={this.state.sdgName}
+          sector={this.state.sector}
+          activitytype={this.state.activitytype}
         />
         <br />
         <SdgDescription
