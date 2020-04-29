@@ -8,7 +8,6 @@ import {
   Button,
   Container,
 } from "react-bootstrap";
-import style from "./FilterMenu.module.css";
 
 class FilterMenu extends Component {
   constructor(props) {

@@ -3,7 +3,7 @@ import "./App.css";
 import * as spreadsheetData from "./data";
 import Project from "./components/projects/Project.jsx";
 import FilterMenu from "./components/filterMenu/FilterMenu.jsx";
-import AddProject from "./components/form/AddProject.js";
+import UserForm from "./components/form/UserForm.js";
 import {
   Button,
   Modal,
@@ -253,9 +253,14 @@ class App extends React.Component {
               <Modal.Title>Add Your Project</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <AddProject
+              {/* <AddProject
                 themes={this.state.themes}
                 sectors={this.state.sectors}
+                goals={this.state.goals}
+              /> */}
+              <UserForm
+                themes={this.state.themes}
+                sectors={this.state.sectors} 
                 goals={this.state.goals}
               />
             </Modal.Body>
@@ -291,7 +296,8 @@ class App extends React.Component {
             <Row className="justify-content-md-center">
               <Col>
                 <Alert variant="danger">
-                  No cards match your search. Please try redefining your criteria.
+                  No cards match your search. Please try redefining your
+                  criteria.
                 </Alert>
               </Col>
             </Row>

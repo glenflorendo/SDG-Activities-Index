@@ -43,12 +43,18 @@ body {
   padding-top: 0px !important;
 }
 
+/* FORM */
+
+.MuiSelect-selectMenu {
+  height: auto !important;
+  white-space: normal !important;
+}
+
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
   .card-column .card {
     column-count: auto;
   }
- 
 }
 /* @media screen and (min-width: 800px) {
   .filterBy {
