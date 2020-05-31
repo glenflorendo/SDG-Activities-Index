@@ -28,21 +28,18 @@ const useStyles = makeStyles((theme) => ({
 const validationSchema = yup.object().shape({
   projectname: yup
     .string()
-    .required("*Project name is required")
+    .required("*Organization name is required")
     .min(2, "*Names must have at least 2 characters")
     .max(100, "*Names can't be longer than 100 characters"),
   description: yup
     .string()
     .max(250, "*Description must be less than 250 characters"),
-  organization: yup
+  website: yup
     .string()
-    .min(2, "*Organiation name must have at least 2 characters")
-    .max(100, "*Organization name can't be longer than 100 characters"),
-  website: yup.string(),
-  // .matches(
-  //   "/^([da-z.-]+).([a-z.]{2,6})([/w .-]*)*/?$/",
-  //   "*Must enter URL in http://www.example.com format"
-  // ),
+    .matches(
+      /^((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+      "Please enter a valid URL"
+    ),
 });
 
 export const OrgForm = ({

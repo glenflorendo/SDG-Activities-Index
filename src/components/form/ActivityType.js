@@ -23,11 +23,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const validationSchema = yup.object({
-  // activtyType: yup
-  //   .string()
-  //   .oneOf(["project", "organization"], "You must select an activity type")
-  //   .required("Required"),
+const validationSchema = yup.object().shape({
+  activityType: yup
+    .string()
+    .required("Please select an activity type to continue"),
+  // activityType: yup.mixed().oneOf(["project", "organization"]),
 });
 
 const options = [
@@ -47,6 +47,7 @@ export const ActivityType = ({ formData, setFormData, nextStep }) => {
           nextStep();
         }}
         validationSchema={validationSchema}
+        validateOnChange={true}
       >
         {({ errors, touched }) => (
           <Form className={classes.form}>
