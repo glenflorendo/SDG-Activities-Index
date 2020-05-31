@@ -13,28 +13,14 @@ class FilterMenu extends Component {
   constructor(props) {
     super(props);
     this.keyword = React.createRef();
-    this.state = {
-      isChecked: false,
-      orgsChecked: false,
-    };
   }
 
   handleProjects = () => {
-    this.setState({ isChecked: !this.state.isChecked, orgsChecked: false });
-    if (this.state.isChecked === false) {
-      this.props.selectProjects();
-    } else if (this.state.isChecked === true) {
-      this.props.resetFilter();
-    }
+    this.props.selectProjects();
   };
 
   handleOrgs = () => {
-    this.setState({ orgsChecked: !this.state.orgsChecked, isChecked: false });
-    if (this.state.orgsChecked === false) {
-      this.props.selectOrganizations();
-    } else if (this.state.orgsChecked === true) {
-      this.props.resetFilter();
-    }
+    this.props.selectOrganizations();
   };
 
   submit() {
@@ -132,7 +118,7 @@ class FilterMenu extends Component {
                   type="radio"
                   label="Projects"
                   style={{ color: "#2c88c8" }}
-                  checked={this.state.isChecked}
+                  checked={this.props.projChecked}
                   onChange={this.handleProjects}
                 />
               </Form.Group>
@@ -143,7 +129,7 @@ class FilterMenu extends Component {
                   type="radio"
                   label="Organizations"
                   style={{ color: "#ff9244" }}
-                  checked={this.state.orgsChecked}
+                  checked={this.props.orgsChecked}
                   onChange={this.handleOrgs}
                 />
               </Form.Group>
@@ -154,19 +140,7 @@ class FilterMenu extends Component {
               </Button>
             </Col>
           </Row>
-          <Row>
-            {/* {this.props.filters.map((filter, index) => (
-              <div key={index}>
-                <span
-                  className={style.filter}
-                  onClick={() => this.props.deleteFilter(filter)}
-                >
-                  {filter}
-                  <span onClick={() => this.props.deleteFilter(filter)}>x</span>
-                </span>
-              </div>
-            ))} */}
-          </Row>
+          <Row></Row>
         </Container>
       </div>
     );

@@ -38,6 +38,9 @@ class App extends React.Component {
       sdgName: "",
       sector: "",
       activitytype: "",
+      //Radio Checks
+      projChecked: false,
+      orgsChecked: false,
     };
   }
 
@@ -118,6 +121,8 @@ class App extends React.Component {
     this.setState(
       {
         activitytype: "project",
+        projChecked: !this.state.projChecked,
+        orgsChecked: false,
       },
       () => this.filterProjects()
     );
@@ -127,6 +132,8 @@ class App extends React.Component {
     this.setState(
       {
         activitytype: "organization",
+        orgsChecked: !this.state.orgsChecked,
+        projChecked: false,
       },
       () => this.filterProjects()
     );
@@ -201,6 +208,8 @@ class App extends React.Component {
       sdgName: "",
       sector: "",
       activitytype: "",
+      projChecked: false,
+      orgsChecked: false,
     });
     this.resetPage.current.resetCurrentPage();
   };
@@ -284,6 +293,8 @@ class App extends React.Component {
           sdgName={this.state.sdgName}
           sector={this.state.sector}
           activitytype={this.state.activitytype}
+          projChecked={this.state.projChecked}
+          orgsChecked={this.state.orgsChecked}
         />
         <br />
         <SdgDescription

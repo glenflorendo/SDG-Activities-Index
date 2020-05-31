@@ -23,15 +23,11 @@ body {
 }
 
 .card {
-  /* transition: transform 1s; */
   border: none !important;
   border-radius: 0 !important;
   box-shadow: 4px 10px 10px 4px #afafaf;
 }
-/* .card:active {
-  transform: rotateY(180deg);
-  transition: transform 1s;
-} */
+
 
 .card-title {
   font-weight: 200 !important;
@@ -57,8 +53,4 @@ body {
     column-count: auto;
   }
 }
-/* @media screen and (min-width: 800px) {
-  .filterBy {
-    padding-left: 45px;
-  }
-} */
+
