@@ -1,40 +1,42 @@
 import React from "react";
 import { Card, Container, CardColumns, Pagination, Row } from "react-bootstrap";
 import style from "./Project.module.css";
-import Fade from "react-reveal/Fade";
+import { Fade, Flip } from "react-reveal";
+import ReactCardFlip from "react-card-flip";
 
 class Project extends React.Component {
   state = {
-    flipped: {},
+    isFlipped: false,
+
     backgroundColor: "",
     height: {},
     currentPage: 1,
-    projectsPerPage: 11
+    projectsPerPage: 11,
   };
 
-  flipCard = data => {
+  flipCard = (data) => {
     console.log(data);
     let cardHeight = document.getElementById(data).offsetHeight;
-    this.setState(prevState => ({
-      flipped: {
-        ...prevState.flipped,
-        [data]: !prevState.flipped[data]
+    this.setState((prevState) => ({
+      isFlipped: {
+        ...prevState.isFlipped,
+        [data]: !prevState.isFlipped[data],
       },
       height: {
         ...prevState.height,
-        [data]: cardHeight
-      }
+        [data]: cardHeight,
+      },
     }));
   };
 
-  getSdgImages = projectSDGs => {
+  getSdgImages = (projectSDGs) => {
     let projectSDGsArr = projectSDGs.split(",");
     let sdgArray = this.props.goals;
     const finalArray = [];
-    projectSDGsArr.forEach(projectSDG =>
-      sdgArray.forEach(sdg => {
+    projectSDGsArr.forEach((projectSDG) =>
+      sdgArray.forEach((sdg) => {
         if (projectSDG === sdg.id) {
-          const sdgData = { image: sdg.image, sdg};
+          const sdgData = { image: sdg.image, sdg };
           finalArray.push(sdgData);
         }
       })
@@ -53,7 +55,7 @@ class Project extends React.Component {
     return sdgImages;
   };
 
-  displayThemes = themes => {
+  displayThemes = (themes) => {
     let themesArr = themes.split(",");
     const themesDisplay = themesArr.map((data, index) => (
       <span
@@ -77,11 +79,11 @@ class Project extends React.Component {
     ) {
       pageNumbers.push(i);
     }
-    const items = pageNumbers.map(number => (
+    const items = pageNumbers.map((number) => (
       <Pagination.Item
         key={number}
         id={number}
-        onClick={e => this.handleClick(e)}
+        onClick={(e) => this.handleClick(e)}
         active={number === this.state.currentPage}
       >
         {number}
@@ -90,15 +92,15 @@ class Project extends React.Component {
     return items;
   };
 
-  handleClick = event => {
+  handleClick = (event) => {
     this.setState({
-      currentPage: Number(event.target.id)
+      currentPage: Number(event.target.id),
     });
   };
 
   resetCurrentPage = () => {
     this.setState({
-      currentPage: 1
+      currentPage: 1,
     });
   };
 
@@ -117,23 +119,27 @@ class Project extends React.Component {
           <Row className="justify-content-end">
             <Pagination>{this.getPages()}</Pagination>
           </Row>
+
           <CardColumns>
             {currentProjects.map((data, index) => (
               <Fade key={data.id} bottom>
-                {/* <div className={style.card}> */}
-                {!this.state.flipped[data.id] ? (
+                <ReactCardFlip
+                  isFlipped={this.state.isFlipped[data.id]}
+                  flipDirection="horizontal"
+                >
                   <Card
                     style={{
                       marginTop: "20px",
-                      textAlign: "center"
+                      textAlign: "center",
                     }}
-                    className="mb-4 p-3"
+                    className="dialog mb-4 p-3"
                     id={data.id}
+                    key="front"
                   >
                     <i
                       className={`${style.flipIcon} fas fa-undo`}
                       style={{
-                        color: "#a6a6a6"
+                        color: "#a6a6a6",
                       }}
                       onClick={() => this.flipCard(data.id)}
                     ></i>
@@ -152,7 +158,7 @@ class Project extends React.Component {
                           color:
                             data.activitytype === "organization"
                               ? "#ff9244"
-                              : "#2c88c8"
+                              : "#2c88c8",
                         }}
                       >
                         {data.projectname}
@@ -167,7 +173,7 @@ class Project extends React.Component {
                       {this.displayThemes(data.theme)}
                     </div>
                   </Card>
-                ) : (
+
                   <Card
                     style={{
                       height: this.state.height[data.id],
@@ -178,10 +184,11 @@ class Project extends React.Component {
                       backgroundColor:
                         data.activitytype === "organization"
                           ? "#ff9244"
-                          : "#2c88c8"
+                          : "#2c88c8",
                     }}
                     className="p-3"
                     id={data.id}
+                    key="back"
                   >
                     <i
                       className={`${style.flipIcon} fas fa-undo`}
@@ -199,11 +206,11 @@ class Project extends React.Component {
                       Read More
                     </a>
                   </Card>
-                )}
-                {/* </div> */}
+                </ReactCardFlip>
               </Fade>
             ))}
           </CardColumns>
+
           <Row className="justify-content-center">
             <Pagination>{this.getPages()}</Pagination>
           </Row>

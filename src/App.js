@@ -260,7 +260,7 @@ class App extends React.Component {
               /> */}
               <UserForm
                 themes={this.state.themes}
-                sectors={this.state.sectors} 
+                sectors={this.state.sectors}
                 goals={this.state.goals}
               />
             </Modal.Body>
