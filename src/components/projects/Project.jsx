@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Container, CardColumns, Pagination, Row } from "react-bootstrap";
 import style from "./Project.module.css";
-import { Fade, Flip } from "react-reveal";
+import { Fade } from "react-reveal";
 import ReactCardFlip from "react-card-flip";
 
 class Project extends React.Component {
@@ -143,6 +143,7 @@ class Project extends React.Component {
                       }}
                       onClick={() => this.flipCard(data.id)}
                     ></i>
+                    <br />
                     <p
                       style={{ color: "#455262" }}
                       className={style.sector}
@@ -194,6 +195,8 @@ class Project extends React.Component {
                       className={`${style.flipIcon} fas fa-undo`}
                       onClick={() => this.flipCard(data.id)}
                     ></i>
+                    <br />
+
                     <Card.Title>{data.projectname}</Card.Title>
                     <Card.Text>{data.organization}</Card.Text>
                     <small>{data.description}</small>

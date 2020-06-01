@@ -1,5 +1,7 @@
-.sdgImage:hover{
+.sdgImage:hover {
   cursor: pointer;
+  height: 62px;
+  box-shadow: 2px 5px 5px 2px #afafaf;
 }
 
 .readMore {
@@ -27,19 +29,22 @@
   margin-top: auto;
 }
 
-.theme:hover{
+.theme:hover {
   cursor: pointer;
+  box-shadow: 2px 5px 5px 2px #afafaf;
 }
 
-.flipIcon{
+.flipIcon {
   margin-bottom: 10px;
-   float: right 
+  float: right;
 }
 
-.flipIcon:hover{
-  cursor:pointer;
-}
-
-.sector:hover{
+.flipIcon:hover {
   cursor: pointer;
+}
+
+.sector:hover {
+  cursor: pointer;
+  font-size: 17px;
+  text-shadow: 2px 2px 5px #afafaf;
 }
