@@ -164,7 +164,14 @@ class Project extends React.Component {
                       >
                         {data.projectname}
                       </Card.Title>
-                      <Card.Text>{data.organization}</Card.Text>
+                      <Card.Text
+                        className={style.organization}
+                        onClick={() =>
+                          this.props.oneOrgSelected(data.organization)
+                        }
+                      >
+                        {data.organization}
+                      </Card.Text>
                     </Card.Body>
                     <Card.Text>{this.getSdgImages(data.sdg)}</Card.Text>
                     <div

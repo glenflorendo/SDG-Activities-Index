@@ -38,6 +38,7 @@ class App extends React.Component {
       sdgName: "",
       sector: "",
       activitytype: "",
+      organization: "",
       //Radio Checks
       projChecked: false,
       orgsChecked: false,
@@ -139,6 +140,15 @@ class App extends React.Component {
     );
   };
 
+  oneOrgSelected = (data) => {
+    this.setState(
+      {
+        organization: data,
+      },
+      () => this.filterProjects()
+    );
+  };
+
   filterProjects = () => {
     let result = this.state.projects;
 
@@ -154,6 +164,11 @@ class App extends React.Component {
     }
     if (this.state.sector) {
       result = result.filter((project) => project.sector === this.state.sector);
+    }
+    if (this.state.organization) {
+      result = result.filter(
+        (project) => project.organization === this.state.organization
+      );
     }
     if (this.state.activitytype) {
       if (this.state.activitytype === "project") {
@@ -334,6 +349,7 @@ class App extends React.Component {
             selectTheme={this.themeSelected}
             selectSector={this.sectorSelected}
             selectGoal={this.goalSelected}
+            oneOrgSelected={this.oneOrgSelected}
           />
         )}
       </div>

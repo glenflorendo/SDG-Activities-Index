@@ -48,3 +48,9 @@
   font-size: 17px;
   text-shadow: 2px 2px 5px #afafaf;
 }
+
+.organization:hover {
+  cursor: pointer;
+  font-size: 17px;
+  text-shadow: 2px 2px 5px #afafaf;
+}
