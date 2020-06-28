@@ -225,6 +225,7 @@ class App extends React.Component {
       activitytype: "",
       projChecked: false,
       orgsChecked: false,
+      organization:""
     });
     this.resetPage.current.resetCurrentPage();
   };
@@ -310,6 +311,7 @@ class App extends React.Component {
           activitytype={this.state.activitytype}
           projChecked={this.state.projChecked}
           orgsChecked={this.state.orgsChecked}
+          organization={this.state.organization}
         />
         <br />
         <SdgDescription

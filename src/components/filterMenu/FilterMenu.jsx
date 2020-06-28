@@ -8,6 +8,7 @@ import {
   Button,
   Container,
 } from "react-bootstrap";
+import style from "./FilterMenu.module.css";
 
 class FilterMenu extends Component {
   constructor(props) {
@@ -140,7 +141,7 @@ class FilterMenu extends Component {
               </Button>
             </Col>
           </Row>
-          <Row></Row>
+                <Row>{this.props.organization=== ""?<p></p>:<p className={style.organization}>{this.props.organization}</p>}</Row>
         </Container>
       </div>
     );
