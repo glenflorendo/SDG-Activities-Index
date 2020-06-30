@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Container, CardColumns, Pagination, Row } from "react-bootstrap";
+import { Card, Container, CardColumns, Pagination, Row, OverlayTrigger, Tooltip } from "react-bootstrap";
 import style from "./Project.module.css";
 import { Fade } from "react-reveal";
 import ReactCardFlip from "react-card-flip";
@@ -136,6 +136,12 @@ class Project extends React.Component {
                     id={data.id}
                     key="front"
                   >
+                    <OverlayTrigger
+      overlay={
+        <Tooltip>
+         Click here to find out more
+        </Tooltip>
+      }>
                     <i
                       className={`${style.flipIcon} fas fa-undo`}
                       style={{
@@ -143,6 +149,7 @@ class Project extends React.Component {
                       }}
                       onClick={() => this.flipCard(data.id)}
                     ></i>
+                    </OverlayTrigger>
                     <br />
                     <p
                       style={{ color: "#455262" }}
@@ -202,6 +209,7 @@ class Project extends React.Component {
                       className={`${style.flipIcon} fas fa-undo`}
                       onClick={() => this.flipCard(data.id)}
                     ></i>
+                   
                     <br />
 
                     <Card.Title>{data.projectname}</Card.Title>
