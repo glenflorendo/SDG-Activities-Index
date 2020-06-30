@@ -181,8 +181,8 @@ export const OrgForm = ({
               fullWidth
             >
               {goals.map((goal) => (
-                <MenuItem key={goal.id} value={goal.id}>
-                  <ListItemText primary={goal.id} secondary={goal.name} />
+                <MenuItem key={goal.id} value={goal.name}>
+                  <ListItemText primary={`${goal.id}. ${goal.name}`} />
                 </MenuItem>
               ))}
             </Field>
