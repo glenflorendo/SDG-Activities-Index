@@ -28,7 +28,6 @@ body {
   box-shadow: 4px 10px 10px 4px #afafaf;
 }
 
-
 .card-title {
   font-weight: 200 !important;
   font-size: 2rem !important;
@@ -38,7 +37,6 @@ body {
   flex: none !important;
   padding-top: 0px !important;
 }
-
 
 /* FORM */
 
@@ -51,10 +49,21 @@ body {
   height: 200px;
 }
 
+/*Collapse*/
+
+.collapse.width {
+  -webkit-transition-property: width, visibility;
+  transition-property: width, visibility;
+  /* width: 0;
+  height: auto; */
+}
+
+
+/*Collapse*/
+
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
   .card-column .card {
     column-count: auto;
   }
 }
-

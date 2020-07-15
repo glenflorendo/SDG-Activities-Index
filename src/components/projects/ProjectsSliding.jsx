@@ -3,14 +3,18 @@ import {
   Card,
   Container,
   CardColumns,
+  Col,
   Pagination,
   Row,
   OverlayTrigger,
   Tooltip,
+  Button,
+  Collapse,
 } from "react-bootstrap";
 import style from "./Project.module.css";
 import { Fade } from "react-reveal";
 import ReactCardFlip from "react-card-flip";
+import StackGrid from "react-stack-grid";
 
 class Project extends React.Component {
   state = {
@@ -20,6 +24,7 @@ class Project extends React.Component {
     height: {},
     currentPage: 1,
     projectsPerPage: 11,
+    open: false,
   };
 
   flipCard = (data) => {
@@ -33,6 +38,16 @@ class Project extends React.Component {
       height: {
         ...prevState.height,
         [data]: cardHeight,
+      },
+    }));
+  };
+
+  handleOpen = (data) => {
+    this.grid.updateLayout();
+    this.setState((prevState) => ({
+      open: {
+        ...prevState.open,
+        [data]: !prevState.open[data],
       },
     }));
   };
@@ -120,60 +135,47 @@ class Project extends React.Component {
       indexOfFirstProject,
       indexOfLastProject
     );
+    const { open } = this.state;
 
     return (
       <div className={style.projects}>
-        <Container>
-          <Row className="justify-content-end">
-            <Pagination>{this.getPages()}</Pagination>
-          </Row>
-
-          <CardColumns>
-            {currentProjects.map((data, index) => (
-              <Fade key={data.id} bottom>
-                <ReactCardFlip
-                  isFlipped={this.state.isFlipped[data.id]}
-                  flipDirection="horizontal"
-                >
-                  <Card
-                    style={{
-                      marginTop: "20px",
-                      textAlign: "center",
-                    }}
-                    className="dialog mb-4 p-3"
-                    id={data.id}
-                    key="front"
-                  >
-                    <div>
-                      {data.activitytype === "organization" ? (
-                        <i
-                          className={`${style.orgIcon} fas fa-city fa-lg`}
-                          size="5x"
-                        ></i>
-                      ) : (
-                        <i className={`${style.projIcon} fas fa-running fa-lg`}></i>
-                      )}
-
-                      <OverlayTrigger
-                        overlay={<Tooltip>Click here to find out more</Tooltip>}
-                      >
-                        <i
-                          className={`${style.flipIcon} fas fa-undo`}
-                          style={{
-                            color: "#a6a6a6",
-                          }}
-                          onClick={() => this.flipCard(data.id)}
-                        ></i>
-                      </OverlayTrigger>
-                      <br />
-                    </div>
+        {/* <Container> */}
+        <Row className="justify-content-end">
+          <Pagination>{this.getPages()}</Pagination>
+        </Row>
+        {/* <CardColumns className={"column-count: 2 !important"}>
+         */}
+        <StackGrid
+          gridRef={(grid) => (this.grid = grid)}
+          columnWidth={400}
+          gutterWidth={20}
+          // horizontal="true"
+          style={{
+            position: "relative",
+            transition: "ease-out 0s",
+          }}
+        >
+          {currentProjects.map((data, index) => (
+            <Fade key={data.id} bottom>
+              <Card
+                style={{
+                  marginTop: "20px",
+                  textAlign: "center",
+                }}
+                // className="dialog mb-4 "
+                id={data.id}
+                key="front"
+              >
+                <Row>
+                  <Col>
                     <p
-                      style={{ color: "#455262" }}
+                      style={{ color: "#455262", marginTop: "20px" }}
                       className={style.sector}
                       onClick={() => this.props.selectSector(data.sector)}
                     >
                       {data.sector}
                     </p>
+
                     <Card.Body>
                       <Card.Title
                         style={{
@@ -202,52 +204,71 @@ class Project extends React.Component {
                     >
                       {this.displayThemes(data.theme)}
                     </div>
-                  </Card>
+                  </Col>
 
-                  <Card
+                  <Col
+                    className="col-1"
                     style={{
-                      height: this.state.height[data.id],
-                      overflow: "auto",
-                      color: "white",
-                      marginTop: "20px",
-                      textAlign: "center",
                       backgroundColor:
                         data.activitytype === "organization"
                           ? "#ff9244"
                           : "#2c88c8",
                     }}
-                    className="p-3"
-                    id={data.id}
-                    key="back"
                   >
-                    <i
-                      className={`${style.flipIcon} fas fa-undo`}
-                      onClick={() => this.flipCard(data.id)}
-                    ></i>
-
-                    <br />
-
-                    <Card.Title>{data.projectname}</Card.Title>
-                    <Card.Text>{data.organization}</Card.Text>
-                    <small>{data.description}</small>
-                    <br />
-                    <a
-                      className={style.readMore}
-                      href={`${data.website}`}
-                      target="_blank"
+                    <div
+                      onClick={() => this.handleOpen(data.id)}
+                      aria-controls={data.id}
+                      aria-expanded={open[data.id]}
+                      className={style.accordion}
                     >
-                      Read More
-                    </a>
-                  </Card>
-                </ReactCardFlip>
-              </Fade>
-            ))}
-          </CardColumns>
+                      See {open[data.id] === true ? "Less " : "More "} About
+                      This{" "}
+                      {data.activitytype === "organization"
+                        ? "Organization"
+                        : "Project"}
+                    </div>
+                  </Col>
+                  <Collapse in={open[data.id]} dimension="width">
+                    <Col
+                      className="col-6"
+                      style={{
+                        // height: this.state.height[data.id],
+                        overflow: "auto",
+                        color: "white",
+                        textAlign: "center",
+                        backgroundColor:
+                          data.activitytype === "organization"
+                            ? "#ff9244"
+                            : "#2c88c8",
+                      }}
+                    >
+                      <Card.Body className="p-3">
+                        <Card.Title>{data.projectname}</Card.Title>
+                        <Card.Text>{data.organization}</Card.Text>
+                        <small>{data.description}</small>
+                        <br />
+                        <a
+                          className={style.readMore}
+                          href={`${data.website}`}
+                          target="_blank"
+                        >
+                          Read More
+                        </a>
+                      </Card.Body>
+                    </Col>
+                  </Collapse>
+                </Row>
+              </Card>
+            </Fade>
+          ))}
+          {/* </CardColumns>
+           */}
+        </StackGrid>
 
-          <Row className="justify-content-center">
-            <Pagination>{this.getPages()}</Pagination>
-          </Row>
-        </Container>
+        <Row className="justify-content-center">
+          <Pagination>{this.getPages()}</Pagination>
+        </Row>
+        {/* </Container> */}
       </div>
     );
   }

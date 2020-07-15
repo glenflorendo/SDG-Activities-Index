@@ -8,7 +8,7 @@ async function getSpreadsheet() {
     null,
     { gzip: false }
   );
-  await promisify(doc.useServiceAccountAuth)(cred).catch(err =>
+  await promisify(doc.useServiceAccountAuth)(cred).catch((err) =>
     console.log("Google Sheets Authentication Error")
   );
   const info = await promisify(doc.getInfo)();
@@ -23,7 +23,7 @@ async function getGoals() {
     null,
     { gzip: false }
   );
-  await promisify(sdgDoc.useServiceAccountAuth)(cred).catch(err =>
+  await promisify(sdgDoc.useServiceAccountAuth)(cred).catch((err) =>
     console.log("Google Sheets Authentication Error")
   );
   const sdgInfo = await promisify(sdgDoc.getInfo)();
@@ -38,14 +38,14 @@ async function addProject(data) {
     null,
     { gzip: false }
   );
-  await promisify(doc.useServiceAccountAuth)(cred).catch(err =>
+  await promisify(doc.useServiceAccountAuth)(cred).catch((err) =>
     console.log("Google Sheets Authentication Error")
   );
 
   const info = await promisify(doc.getInfo)();
   const sheet = info.worksheets[1];
 
-  sheet.addRow(data, function(err) {
+  sheet.addRow(data, function (err) {
     if (err) {
       console.log(err);
     }

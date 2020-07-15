@@ -51,6 +51,7 @@ class App extends React.Component {
   };
 
   spreadsheeetSuccess = (data) => {
+    const sortedData = data.sort((a, b) => a.sector.localeCompare(b.sector));
     let themesSplit = [];
     let themesList = [];
     const themesArray = data.map((data) => data.theme);
@@ -67,8 +68,8 @@ class App extends React.Component {
     const sectorsArrayNoDuplicates = Array.from(new Set(sectorsArray));
     const sectorsAlphabetical = sectorsArrayNoDuplicates.sort();
     this.setState({
-      projects: data,
-      projectsDisplay: data,
+      projects: sortedData,
+      projectsDisplay: sortedData,
       themes: themesAlphabetical,
       sectors: sectorsAlphabetical,
       loading: false,
@@ -225,7 +226,7 @@ class App extends React.Component {
       activitytype: "",
       projChecked: false,
       orgsChecked: false,
-      organization:""
+      organization: "",
     });
     this.resetPage.current.resetCurrentPage();
   };
@@ -251,13 +252,13 @@ class App extends React.Component {
   render() {
     return (
       <div style={{ backgroundColor: "white" }}>
-        <div style={{ margin: "40px" }}>
+        {/* <div style={{ margin: "40px" }}>
           <h1 style={{ textAlign: "center", size: "7" }}>ACTIVITIES INDEX</h1>
 
           <p style={{ color: "rgb(16, 162, 198)", textAlign: "center" }}>
             ────────
           </p>
-        </div>
+        </div> */}
 
         <div style={{ textAlign: "center" }}>
           <Button
@@ -306,6 +307,7 @@ class App extends React.Component {
           selectGoal={this.goalSelected}
           active={this.state.active}
           theme={this.state.theme}
+          sdg={this.state.sdg}
           sdgName={this.state.sdgName}
           sector={this.state.sector}
           activitytype={this.state.activitytype}

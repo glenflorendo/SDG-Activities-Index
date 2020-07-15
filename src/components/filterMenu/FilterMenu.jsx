@@ -7,8 +7,10 @@ import {
   Form,
   Button,
   Container,
+  InputGroup,
 } from "react-bootstrap";
 import style from "./FilterMenu.module.css";
+import { FormGroup } from "@material-ui/core";
 
 class FilterMenu extends Component {
   constructor(props) {
@@ -60,7 +62,11 @@ class FilterMenu extends Component {
                 className="dropdown"
                 variant="secondary"
                 id="dropdown-basic-button"
-                title={this.props.sdgName === "" ? "SDG" : this.props.sdgName}
+                title={
+                  this.props.sdgName === ""
+                    ? "SDG"
+                    : [this.props.sdg, ". ", this.props.sdgName]
+                }
               >
                 {this.props.goals.map((goal, index) => (
                   <Dropdown.Item
@@ -69,7 +75,7 @@ class FilterMenu extends Component {
                     active={this.props.active[index]}
                   >
                     <img src={goal.image} alt="goal" width="30" height="30" />{" "}
-                    {goal.name}
+                    {goal.id}. {goal.name}
                   </Dropdown.Item>
                 ))}
               </DropdownButton>
@@ -115,24 +121,36 @@ class FilterMenu extends Component {
           >
             <Col xs lg="3">
               <Form.Group controlId="projectsCheckbox">
-                <Form.Check
-                  type="radio"
-                  label="Projects"
-                  style={{ color: "#2c88c8" }}
-                  checked={this.props.projChecked}
-                  onChange={this.handleProjects}
-                />
+                <InputGroup>
+                  <Form.Check
+                    type="radio"
+                    label="Projects"
+                    style={{ color: "#2c88c8" }}
+                    checked={this.props.projChecked}
+                    onChange={this.handleProjects}
+                  />
+                  <i
+                    style={{ color: "#2c88c8", padding: "5px" }}
+                    className="fas fa-running"
+                  ></i>
+                </InputGroup>
               </Form.Group>
             </Col>
             <Col xs lg="3">
               <Form.Group controlId="orgsCheckbox">
-                <Form.Check
-                  type="radio"
-                  label="Organizations"
-                  style={{ color: "#ff9244" }}
-                  checked={this.props.orgsChecked}
-                  onChange={this.handleOrgs}
-                />
+                <InputGroup>
+                  <Form.Check
+                    type="radio"
+                    label="Organizations"
+                    style={{ color: "#ff9244" }}
+                    checked={this.props.orgsChecked}
+                    onChange={this.handleOrgs}
+                  />
+                  <i
+                    style={{ color: "#ff9244", padding: "5px" }}
+                    className="fas fa-city"
+                  ></i>
+                </InputGroup>
               </Form.Group>
             </Col>
             <Col xs="3" md="3" lg="3">
@@ -141,7 +159,13 @@ class FilterMenu extends Component {
               </Button>
             </Col>
           </Row>
-                <Row>{this.props.organization=== ""?<p></p>:<p className={style.organization}>{this.props.organization}</p>}</Row>
+          <Row>
+            {this.props.organization === "" ? (
+              <p></p>
+            ) : (
+              <p className={style.organization}>{this.props.organization}</p>
+            )}
+          </Row>
         </Container>
       </div>
     );

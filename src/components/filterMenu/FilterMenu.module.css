@@ -1,19 +1,29 @@
 .filter {
-    background-color: #e4e5e6;
-    border-radius: 10px;
-    color: #455262;
-    font-size: 14px;
-    padding: 5px;
-    margin: 5px;
-    display: inline-block;
-  }
+  background-color: #e4e5e6;
+  border-radius: 10px;
+  color: #455262;
+  font-size: 14px;
+  padding: 5px;
+  margin: 5px;
+  display: inline-block;
+}
 
-  .organization {
-    background-color: #FFB380;
-    border-radius: 10px;
-    color: white;
-    font-size: 14px;
-    padding: 5px;
-    margin: 5px;
-    display: inline-block;
-  }
+/* .organization {
+  background-color: #ffb380;
+  border-radius: 10px;
+  color: white;
+  font-size: 14px;
+  padding: 5px;
+  margin: 5px;
+  display: inline-block;
+} */
+
+/* .projectRadio {
+  background-color: #2c88c8;
+  border-radius: 10px;
+  color: white;
+  font-size: 14px;
+  padding: 5px;
+  margin: 5px;
+  display: inline-block;
+} */
