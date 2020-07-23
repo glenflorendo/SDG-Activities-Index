@@ -19,7 +19,7 @@ class Project extends React.Component {
     backgroundColor: "",
     height: {},
     currentPage: 1,
-    projectsPerPage: 11,
+    projectsPerPage: 18,
   };
 
   flipCard = (data) => {
