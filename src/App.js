@@ -51,7 +51,6 @@ class App extends React.Component {
   };
 
   spreadsheeetSuccess = (data) => {
-    const sortedData = data.sort((a, b) => a.sector.localeCompare(b.sector));
     let themesSplit = [];
     let themesList = [];
     const themesArray = data.map((data) => data.theme);
@@ -68,8 +67,8 @@ class App extends React.Component {
     const sectorsArrayNoDuplicates = Array.from(new Set(sectorsArray));
     const sectorsAlphabetical = sectorsArrayNoDuplicates.sort();
     this.setState({
-      projects: sortedData,
-      projectsDisplay: sortedData,
+      projects: data,
+      projectsDisplay: data,
       themes: themesAlphabetical,
       sectors: sectorsAlphabetical,
       loading: false,
