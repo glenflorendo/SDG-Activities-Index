@@ -6,8 +6,7 @@
 
 .readMore {
   color: white !important;
-  margin-bottom: 20px !important;
-  margin-top: auto;
+  padding-top:20px;
 }
 
 .readMore:hover {
@@ -65,12 +64,11 @@
 .projIcon {
   float: left;
   color: #2c88c8;
-
 }
 
 /* Horizontal Masonry  */
 
-.masonry { 
+.masonry {
   display: flex;
   flex-flow: row wrap;
   /* margin-left: -8px; Adjustment for the gutter */

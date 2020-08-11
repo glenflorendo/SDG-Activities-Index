@@ -151,7 +151,9 @@ class Project extends React.Component {
                           size="5x"
                         ></i>
                       ) : (
-                        <i className={`${style.projIcon} fas fa-running fa-lg`}></i>
+                        <i
+                          className={`${style.projIcon} fas fa-running fa-lg`}
+                        ></i>
                       )}
 
                       <OverlayTrigger
@@ -231,13 +233,15 @@ class Project extends React.Component {
                     <Card.Text>{data.organization}</Card.Text>
                     <small>{data.description}</small>
                     <br />
-                    <a
-                      className={style.readMore}
-                      href={`${data.website}`}
-                      target="_blank"
-                    >
-                      Read More
-                    </a>
+                    <div style={{ paddingTop: "30px" }}>
+                      <a
+                        className={style.readMore}
+                        href={`${data.website}`}
+                        target="_blank"
+                      >
+                        Read More
+                      </a>
+                    </div>
                   </Card>
                 </ReactCardFlip>
               </Fade>
