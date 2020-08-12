@@ -14,7 +14,7 @@ import {
   Col,
 } from "react-bootstrap";
 import SdgDescription from "./components/sdg-description/SdgDescription";
-import { withRouter } from 'react-router-dom'
+import { withRouter, Route } from "react-router-dom";
 
 class App extends React.Component {
   constructor(props) {
@@ -46,10 +46,16 @@ class App extends React.Component {
     };
   }
 
-  componentDidMount = () => {
-    spreadsheetData.getSpreadsheet().then(this.spreadsheeetSuccess);
-    spreadsheetData.getGoals().then(this.goalsSuccess);
-  };
+  async componentDidMount() {
+    await spreadsheetData.getSpreadsheet().then(this.spreadsheeetSuccess);
+    await spreadsheetData.getGoals().then(this.goalsSuccess);
+    if (this.props.location.pathname.length > 1) {
+      this.setState({
+        sdg: this.props.location.pathname.replace("/", ""),
+      });
+      this.filterProjects();
+    }
+  }
 
   spreadsheeetSuccess = (data) => {
     let themesSplit = [];
@@ -253,14 +259,6 @@ class App extends React.Component {
   render() {
     return (
       <div style={{ backgroundColor: "white" }}>
-        {/* <div style={{ margin: "40px" }}>
-          <h1 style={{ textAlign: "center", size: "7" }}>ACTIVITIES INDEX</h1>
-
-          <p style={{ color: "rgb(16, 162, 198)", textAlign: "center" }}>
-            ────────
-          </p>
-        </div> */}
-
         <div style={{ textAlign: "center" }}>
           <Button
             className="add-project"
@@ -280,11 +278,6 @@ class App extends React.Component {
               <Modal.Title>Add Your Project</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              {/* <AddProject
-                themes={this.state.themes}
-                sectors={this.state.sectors}
-                goals={this.state.goals}
-              /> */}
               <UserForm
                 themes={this.state.themes}
                 sectors={this.state.sectors}
@@ -294,6 +287,7 @@ class App extends React.Component {
           </Modal>
         </div>
         <FilterMenu
+          {...this.props}
           themes={this.state.themes}
           sectors={this.state.sectors}
           selectTheme={this.themeSelected}
@@ -347,6 +341,7 @@ class App extends React.Component {
           </Spinner>
         ) : (
           <Project
+            {...this.props}
             projects={this.state.projectsDisplay}
             goals={this.state.goals}
             ref={this.resetPage}

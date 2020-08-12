@@ -10,7 +10,6 @@ import {
   InputGroup,
 } from "react-bootstrap";
 import style from "./FilterMenu.module.css";
-import { FormGroup } from "@material-ui/core";
 
 class FilterMenu extends Component {
   constructor(props) {

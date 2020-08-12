@@ -120,6 +120,7 @@ class Project extends React.Component {
       indexOfFirstProject,
       indexOfLastProject
     );
+    
 
     return (
       <div className={style.projects}>
