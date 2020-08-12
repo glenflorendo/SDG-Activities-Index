@@ -14,6 +14,7 @@ import {
   Col,
 } from "react-bootstrap";
 import SdgDescription from "./components/sdg-description/SdgDescription";
+import { withRouter } from 'react-router-dom'
 
 class App extends React.Component {
   constructor(props) {
@@ -158,6 +159,7 @@ class App extends React.Component {
       );
     }
     if (this.state.sdg) {
+      this.props.history.push(`${this.state.sdg}`);
       result = result.filter((project) =>
         project.sdg.split(",").includes(this.state.sdg)
       );
@@ -360,4 +362,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withRouter(App);
