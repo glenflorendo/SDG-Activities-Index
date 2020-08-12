@@ -47,11 +47,16 @@ class App extends React.Component {
   }
 
   async componentDidMount() {
+    let pathname = this.props.location.pathname;
     await spreadsheetData.getSpreadsheet().then(this.spreadsheeetSuccess);
     await spreadsheetData.getGoals().then(this.goalsSuccess);
-    if (this.props.location.pathname.length > 1) {
+    // console.log(this.state.goals)
+    if (pathname.length > 1) {
+      let sdgUrl = pathname.replace("/", "");
+      let sdgNameUrl = this.state.goals.filter((item) => item.id === sdgUrl);
       this.setState({
-        sdg: this.props.location.pathname.replace("/", ""),
+        sdg: sdgUrl,
+        sdgName: sdgNameUrl[0].name,
       });
       this.filterProjects();
     }
