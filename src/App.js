@@ -50,7 +50,6 @@ class App extends React.Component {
     let pathname = this.props.location.pathname;
     await spreadsheetData.getSpreadsheet().then(this.spreadsheeetSuccess);
     await spreadsheetData.getGoals().then(this.goalsSuccess);
-    // console.log(this.state.goals)
     if (pathname.length > 1) {
       let sdgUrl = pathname.replace("/", "");
       let sdgNameUrl = this.state.goals.filter((item) => item.id === sdgUrl);

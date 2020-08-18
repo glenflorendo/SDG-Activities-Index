@@ -8,7 +8,7 @@ import {
   FormControlLabel,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 import * as yup from "yup";
 
 const useStyles = makeStyles((theme) => ({
@@ -24,6 +24,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const validationSchema = yup.object().shape({
+  name: yup
+    .string()
+    .required("*Please provide your name")
+    .max(100, "*Names can't be longer than 100 characters"),
+  email: yup
+    .string()
+    .required("*Please provide an email address")
+    .email("*Please provide a valid email address"),
   activityType: yup
     .string()
     .required("Please select an activity type to continue"),
@@ -51,7 +59,26 @@ export const ActivityType = ({ formData, setFormData, nextStep }) => {
       >
         {({ errors, touched }) => (
           <Form className={classes.form}>
-            <FormLabel margin="normal">Activity Type*</FormLabel>
+            <Field
+              name="name"
+              label="Your Name*"
+              margin="normal"
+              as={TextField}
+              error={touched.name && errors.name}
+              helperText={touched.name && errors.name}
+              fullWidth
+            />
+            <Field
+              name="email"
+              label="Your Email*"
+              margin="normal"
+              as={TextField}
+              error={touched.email && errors.email}
+              helperText={touched.email && errors.email}
+              fullWidth
+            />
+            <br/>
+            <FormLabel>Activity Type*</FormLabel>
             <RadioGroup name="activityType">
               {options.map((option, index) => (
                 <FormControlLabel

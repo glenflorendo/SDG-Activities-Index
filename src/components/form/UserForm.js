@@ -9,6 +9,8 @@ import { ActivityType } from "./ActivityType";
 const UserForm = (props) => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
+    name: "",
+    email: "",
     activityType: "",
     projectname: "",
     organization: "",
