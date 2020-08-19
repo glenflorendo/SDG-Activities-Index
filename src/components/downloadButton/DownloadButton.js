@@ -22,12 +22,12 @@ export default class DownloadButton extends Component {
         <OverlayTrigger
           overlay={<Tooltip>Download a CSV file of your search</Tooltip>}
         >
-          <Button
-            color="info"
-            className={style.button}
-            onClick={() => this.handleDownload()}
-          >
-            <CSVLink style={{ color: "white" }} data={csvData}>
+          <Button color="info" className={style.button}>
+            <CSVLink
+              style={{ color: "white" }}
+              data={csvData}
+              filename={"Activities_Index_Data.csv"}
+            >
               Download Data <i class="fas fa-download"></i>
             </CSVLink>
           </Button>
