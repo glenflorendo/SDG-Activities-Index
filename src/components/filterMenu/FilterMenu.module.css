@@ -8,22 +8,6 @@
   display: inline-block;
 }
 
-/* .organization {
-  background-color: #ffb380;
-  border-radius: 10px;
-  color: white;
-  font-size: 14px;
-  padding: 5px;
-  margin: 5px;
-  display: inline-block;
-} */
-
-/* .projectRadio {
-  background-color: #2c88c8;
-  border-radius: 10px;
-  color: white;
-  font-size: 14px;
-  padding: 5px;
-  margin: 5px;
-  display: inline-block;
-} */
+.resetButton{
+  padding-top: 0 !important;
+}

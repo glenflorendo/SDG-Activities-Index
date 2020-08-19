@@ -153,7 +153,7 @@ class FilterMenu extends Component {
               </Form.Group>
             </Col>
             <Col xs="3" md="3" lg="3">
-              <Button variant="link" onClick={() => this.props.resetFilter()}>
+              <Button variant="link" className={style.resetButton} onClick={() => this.props.resetFilter()}>
                 Reset Filter
               </Button>
             </Col>
