@@ -17,6 +17,8 @@ const useStyles = makeStyles((theme) => ({
 export const Confirm = ({ formData, prevStep, nextStep }) => {
   const classes = useStyles();
   const {
+    name,
+    email,
     activityType,
     projectname,
     organization,
@@ -30,6 +32,20 @@ export const Confirm = ({ formData, prevStep, nextStep }) => {
     <>
       <div>
         <List>
+          <ListItem>
+            <ListItemText
+              primary="Contact Name"
+              secondary={name}
+              className={classes.textCenter}
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemText
+              primary="Email"
+              secondary={email}
+              className={classes.textCenter}
+            />
+          </ListItem>
           <ListItem>
             <ListItemText
               primary="Activity Type"

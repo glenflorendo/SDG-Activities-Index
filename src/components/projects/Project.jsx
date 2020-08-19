@@ -120,15 +120,23 @@ class Project extends React.Component {
       indexOfFirstProject,
       indexOfLastProject
     );
-    
+    const indexTest = this.state.currentPage * currentProjects.length - 1;
 
     return (
       <div className={style.projects}>
         <Container>
           <Row className="justify-content-end">
+            <small>
+              Showing projects {indexOfFirstProject + 1}-
+              {currentProjects.length < 17
+                ? this.props.projects.length
+                : indexTest + 1}{" "}
+              out of {this.props.projects.length} projects
+            </small>
+          </Row>
+          <Row className="justify-content-end">
             <Pagination>{this.getPages()}</Pagination>
           </Row>
-
           <CardColumns>
             {currentProjects.map((data, index) => (
               <Fade key={data.id} bottom>

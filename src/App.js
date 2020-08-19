@@ -14,7 +14,7 @@ import {
   Col,
 } from "react-bootstrap";
 import SdgDescription from "./components/sdg-description/SdgDescription";
-import { withRouter, Route } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class App extends React.Component {
   constructor(props) {
