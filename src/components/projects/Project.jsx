@@ -4,6 +4,7 @@ import {
   Container,
   CardColumns,
   Pagination,
+  Col,
   Row,
   OverlayTrigger,
   Tooltip,
@@ -11,6 +12,7 @@ import {
 import style from "./Project.module.css";
 import { Fade } from "react-reveal";
 import ReactCardFlip from "react-card-flip";
+import DownloadButton from "../downloadButton/DownloadButton.js";
 
 class Project extends React.Component {
   state = {
@@ -125,17 +127,24 @@ class Project extends React.Component {
     return (
       <div className={style.projects}>
         <Container>
-          <Row className="justify-content-end">
-            <small>
-              Showing projects {indexOfFirstProject + 1}-
-              {currentProjects.length < 17
-                ? this.props.projects.length
-                : indexTest + 1}{" "}
-              out of {this.props.projects.length} projects
-            </small>
-          </Row>
-          <Row className="justify-content-end">
-            <Pagination>{this.getPages()}</Pagination>
+          <Row>
+            <Col>
+              <DownloadButton projects={this.props.projects} />
+            </Col>
+            <Col>
+              <Row className="justify-content-end">
+                <small>
+                  Showing projects {indexOfFirstProject + 1}-
+                  {currentProjects.length < 17
+                    ? this.props.projects.length
+                    : indexTest + 1}{" "}
+                  out of {this.props.projects.length} projects
+                </small>
+              </Row>
+              <Row className="justify-content-end">
+                <Pagination>{this.getPages()}</Pagination>
+              </Row>
+            </Col>
           </Row>
           <CardColumns>
             {currentProjects.map((data, index) => (
